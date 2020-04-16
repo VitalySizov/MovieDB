@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tab ids -->
+    <item name="main_tab" type="id" />
+    <item name="search_tab" type="id" />
+    <item name="account_tab" type="id" />
+
+</resources>
