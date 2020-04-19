@@ -2,10 +2,7 @@ package ru.vitalysizov.moviedb.di.components
 
 import dagger.Component
 import ru.vitalysizov.moviedb.MovieDbApplication
-import ru.vitalysizov.moviedb.di.modules.AppModule
-import ru.vitalysizov.moviedb.di.modules.ComponentDependenciesModule
-import ru.vitalysizov.moviedb.di.modules.NetworkModule
-import ru.vitalysizov.moviedb.di.modules.RepositoriesModule
+import ru.vitalysizov.moviedb.di.modules.*
 import ru.vitalysizov.moviedb.presentation.AppActivity
 import ru.vitalysizov.moviedb.presentation.account_tab.dependencies.AccountTabDependencies
 import ru.vitalysizov.moviedb.presentation.home_tab.dependencies.HomeTabDependencies
@@ -19,7 +16,8 @@ import javax.inject.Singleton
         AppModule::class,
         ComponentDependenciesModule::class,
         NetworkModule::class,
-        RepositoriesModule::class
+        RepositoriesModule::class,
+        UtilsModule::class
     ]
 )
 

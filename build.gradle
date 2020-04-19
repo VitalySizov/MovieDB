@@ -18,7 +18,8 @@ buildscript {
             retrofit          : '2.6.2',
             httpLogging       : '4.2.1',
             groupie           : '2.8.0',
-            koil              : "0.9.5"
+            koil              : '0.9.5',
+            utils             : '1.28.0'
     ]
 
     repositories {

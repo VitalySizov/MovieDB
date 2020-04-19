@@ -90,4 +90,7 @@ dependencies {
     // Koil (image loading library)
     implementation "io.coil-kt:coil:${versions.koil}"
 
+    // Utils
+    implementation "com.blankj:utilcodex:${versions.utils}"
+
 }

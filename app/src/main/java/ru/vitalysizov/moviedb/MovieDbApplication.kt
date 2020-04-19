@@ -5,6 +5,7 @@ import ru.vitalysizov.moviedb.di.components.AppComponent
 import ru.vitalysizov.moviedb.di.components.DaggerAppComponent
 import ru.vitalysizov.moviedb.di.modules.AppModule
 import ru.vitalysizov.moviedb.di.modules.RepositoriesModule
+import ru.vitalysizov.moviedb.di.modules.UtilsModule
 
 class MovieDbApplication : Application() {
 
@@ -22,6 +23,7 @@ class MovieDbApplication : Application() {
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .repositoriesModule(RepositoriesModule())
+            .utilsModule(UtilsModule(this))
             .build()
     }
 }

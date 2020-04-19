@@ -1,8 +1,10 @@
 package ru.vitalysizov.moviedb.presentation.home_tab.mvp
 
+import com.blankj.utilcode.util.StringUtils
 import com.xwray.groupie.Group
 import com.xwray.groupie.kotlinandroidextensions.Item
 import moxy.InjectViewState
+import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.domain.useCase.movies.LoadNowPlayingMoviesUseCase
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
 import ru.vitalysizov.moviedb.presentation.base.mvp.BasePresenter
@@ -34,12 +36,12 @@ class HomeTabPresenter @Inject constructor(
     }
 
     private fun handleSuccessLoadNowPlayingMovies(movies: List<MovieItem>) {
-        uiItems.add(HeaderMovieAdapterItem("TEST"))
+        uiItems.add(HeaderMovieAdapterItem(StringUtils.getString(R.string.whats_popular_header)))
         uiItems.add(prepareMovies(movies))
         viewState.setItems(uiItems)
     }
 
-    private fun prepareMovies(items: List<MovieItem>) : CarouselAdapterItem {
+    private fun prepareMovies(items: List<MovieItem>): CarouselAdapterItem {
         val moviesItem = arrayListOf<Item>()
         items.forEach { item -> moviesItem.add(MovieAdapterItem(item)) }
         return CarouselAdapterItem(moviesItem)
