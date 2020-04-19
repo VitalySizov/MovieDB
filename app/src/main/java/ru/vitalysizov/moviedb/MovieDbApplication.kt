@@ -4,6 +4,7 @@ import android.app.Application
 import ru.vitalysizov.moviedb.di.components.AppComponent
 import ru.vitalysizov.moviedb.di.components.DaggerAppComponent
 import ru.vitalysizov.moviedb.di.modules.AppModule
+import ru.vitalysizov.moviedb.di.modules.RepositoriesModule
 
 class MovieDbApplication : Application() {
 
@@ -20,6 +21,7 @@ class MovieDbApplication : Application() {
     private fun initAppComponent() {
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
+            .repositoriesModule(RepositoriesModule())
             .build()
     }
 }

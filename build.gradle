@@ -9,12 +9,16 @@ buildscript {
             androidxAppCompat : '1.1.0',
             materialDesign    : '1.1.0',
             androidxConstraint: '2.0.0-beta4',
-            navigation        : '2.2.1',
+            navigation        : '2.2.2',
             moxy              : '2.1.2',
             rxKotlin          : '2.4.0',
             rxAndroid         : '2.1.1',
             ahbottomnavigation: '2.3.4',
             dagger            : '2.15',
+            retrofit          : '2.6.2',
+            httpLogging       : '4.2.1',
+            groupie           : '2.8.0',
+            koil              : "0.9.5"
     ]
 
     repositories {
@@ -35,7 +39,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 

@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.Lazy
 import moxy.MvpAppCompatFragment
 import ru.vitalysizov.moviedb.presentation.base.mvp.BasePresenter
+import javax.inject.Inject
 
 abstract class BaseFragment<Presenter : BasePresenter<*>> : MvpAppCompatFragment(), IBaseView {
 
     abstract val layoutId: Int
+
+    @Inject
+    open lateinit var lazyPresenter: Lazy<Presenter>
 
     abstract fun performInject()
 

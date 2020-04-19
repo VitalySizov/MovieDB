@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/mainTabFragment"
         android:name="ru.vitalysizov.moviedb.presentation.home_tab.view.HomeTabFragment"
-        tools:layout="@layout/fragment_main_tab"
+        tools:layout="@layout/fragment_home_tab"
         android:label="MainTabFragment" />
 </navigation>

@@ -14,6 +14,11 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField 'String', 'BASE_API_URL', '"https://api.themoviedb.org/3/"'
+        buildConfigField 'String', 'API_KEY', '"13847aa040037f1de9e84ea1f853d0fb"'
+
+        buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/w500"'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -71,5 +76,18 @@ dependencies {
     compileOnly 'javax.annotation:jsr250-api:1.0'
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.httpLogging}"
+
+    // Groupie
+    implementation "com.xwray:groupie:${versions.groupie}"
+    implementation "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"
+
+    // Koil (image loading library)
+    implementation "io.coil-kt:coil:${versions.koil}"
 
 }
