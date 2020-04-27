@@ -5,6 +5,7 @@ import io.reactivex.disposables.Disposable
 import moxy.MvpPresenter
 import ru.vitalysizov.moviedb.BuildConfig
 import ru.vitalysizov.moviedb.presentation.base.view.IBaseView
+import ru.vitalysizov.moviedb.presentation.base.view.ILoadingView
 
 abstract class BasePresenter<View : IBaseView> : MvpPresenter<View>() {
 
@@ -15,6 +16,10 @@ abstract class BasePresenter<View : IBaseView> : MvpPresenter<View>() {
     }
 
     fun handleError(t: Throwable) {
+        val view = viewState
+        if (view is ILoadingView) {
+            view.showLoading(false)
+        }
         if (BuildConfig.DEBUG) {
             t.printStackTrace()
         }

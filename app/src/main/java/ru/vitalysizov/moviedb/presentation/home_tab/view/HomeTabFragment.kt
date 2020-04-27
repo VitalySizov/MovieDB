@@ -10,14 +10,15 @@ import moxy.ktx.moxyPresenter
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.di.base.findComponentDependencies
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
+import ru.vitalysizov.moviedb.presentation.base.view.ILoadingView
 import ru.vitalysizov.moviedb.presentation.home_tab.di.DaggerHomeTabComponent
 import ru.vitalysizov.moviedb.presentation.home_tab.mvp.HomeTabPresenter
 import ru.vitalysizov.moviedb.utils.GroupieAdapter
 
-class HomeTabFragment : BaseFragment<HomeTabPresenter>(), IHomeTabView {
+class HomeTabFragment : BaseFragment<HomeTabPresenter>(), IHomeTabView, ILoadingView {
 
     private val presenter: HomeTabPresenter by moxyPresenter { lazyPresenter.get() }
-    private val homeAdapter: GroupieAdapter by lazy { GroupieAdapter() }
+    private val homeTabAdapter: GroupieAdapter by lazy { GroupieAdapter() }
 
     override val layoutId: Int
         get() = R.layout.fragment_home_tab
@@ -37,11 +38,15 @@ class HomeTabFragment : BaseFragment<HomeTabPresenter>(), IHomeTabView {
     private fun initRecyclerView() {
         rv_home.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = homeAdapter
+            adapter = homeTabAdapter
         }
     }
 
     override fun setItems(items: List<Group>) {
-        homeAdapter.update(items)
+        homeTabAdapter.update(items)
+    }
+
+    override fun itemChange(position: Int) {
+        homeTabAdapter.notifyItemChanged(position)
     }
 }

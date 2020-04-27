@@ -5,20 +5,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.item_carouse_movies.view.*
+import kotlinx.android.synthetic.main.item_carousel_movies.view.*
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.utils.GroupieAdapter
 
-class CarouselAdapterItem(private val movieItems: List<Item>) : Item() {
+class CarouselMoviesAdapterItem(private val movieItems: ArrayList<Item>) : Item() {
 
     private val moviesAdapter = GroupieAdapter()
-    private var linearLayoutManager: LinearLayoutManager? = null
 
     override fun createViewHolder(itemView: View): GroupieViewHolder {
-        linearLayoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+        val linearLayoutManager =
+            LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
         return super.createViewHolder(itemView.apply {
             rv_carousel.layoutManager = linearLayoutManager
-            rv_carousel.setHasFixedSize(true)
         })
     }
 
@@ -28,5 +27,10 @@ class CarouselAdapterItem(private val movieItems: List<Item>) : Item() {
         moviesAdapter.addAll(movieItems)
     }
 
-    override fun getLayout(): Int = R.layout.item_carouse_movies
+    fun updateList(items: List<Item>) {
+        movieItems.clear()
+        movieItems.addAll(items)
+    }
+
+    override fun getLayout(): Int = R.layout.item_carousel_movies
 }

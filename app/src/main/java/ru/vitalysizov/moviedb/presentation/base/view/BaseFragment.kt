@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import dagger.Lazy
 import moxy.MvpAppCompatFragment
+import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.presentation.base.mvp.BasePresenter
+import ru.vitalysizov.moviedb.utils.visibleOrGone
 import javax.inject.Inject
 
-abstract class BaseFragment<Presenter : BasePresenter<*>> : MvpAppCompatFragment(), IBaseView {
+abstract class BaseFragment<Presenter : BasePresenter<*>> : MvpAppCompatFragment(), IBaseView,
+    ILoadingView {
 
     abstract val layoutId: Int
 
@@ -37,5 +41,9 @@ abstract class BaseFragment<Presenter : BasePresenter<*>> : MvpAppCompatFragment
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(layoutId, container, false)
+    }
+
+    override fun showLoading(show: Boolean) {
+        view?.findViewById<FrameLayout>(R.id.loading_container)?.visibleOrGone(show)
     }
 }
