@@ -1,31 +1,42 @@
 package ru.vitalysizov.moviedb.di.components
 
+import android.app.Application
+import dagger.BindsInstance
 import dagger.Component
-import ru.vitalysizov.moviedb.MovieDbApplication
-import ru.vitalysizov.moviedb.di.modules.*
-import ru.vitalysizov.moviedb.presentation.AppActivity
-import ru.vitalysizov.moviedb.presentation.account_tab.dependencies.AccountTabDependencies
-import ru.vitalysizov.moviedb.presentation.home_tab.dependencies.HomeTabDependencies
-import ru.vitalysizov.moviedb.presentation.main.dependencies.MainDependencies
-import ru.vitalysizov.moviedb.presentation.search_tab.dependencies.SearchTabDependencies
-import ru.vitalysizov.moviedb.presentation.splash.dependencies.SplashDependencies
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+import ru.vitalysizov.moviedb.App
+import ru.vitalysizov.moviedb.di.modules.ActivityBuilder
+import ru.vitalysizov.moviedb.di.modules.NetworkModule
+import ru.vitalysizov.moviedb.di.modules.RepositoriesModule
+import ru.vitalysizov.moviedb.di.modules.ViewModelFactoryModule
 import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
-        AppModule::class,
-        ComponentDependenciesModule::class,
+        AndroidInjectionModule::class,
         NetworkModule::class,
         RepositoriesModule::class,
-        UtilsModule::class
+        ViewModelFactoryModule::class,
+        ActivityBuilder::class
     ]
 )
+interface AppComponent : AndroidInjector<App> {
 
-@Singleton
-interface AppComponent : MainDependencies, HomeTabDependencies, SearchTabDependencies,
-    AccountTabDependencies, SplashDependencies {
+    @Component.Builder
+    interface Builder {
 
-    fun inject(appActivity: AppActivity)
-    fun inject(application: MovieDbApplication)
+        @BindsInstance
+        fun application(app: Application): Builder
+
+        fun netWorkModule(networkModule: NetworkModule): Builder
+
+        fun repositoryModule(repositoryModule: RepositoriesModule): Builder
+
+        fun build(): AppComponent
+    }
+
+    override fun inject(app: App)
 
 }

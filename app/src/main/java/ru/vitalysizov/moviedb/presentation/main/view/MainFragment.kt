@@ -2,26 +2,21 @@ package ru.vitalysizov.moviedb.presentation.main.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import ru.vitalysizov.moviedb.R
-import ru.vitalysizov.moviedb.di.base.findComponentDependencies
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
-import ru.vitalysizov.moviedb.presentation.main.di.DaggerMainComponent
-import ru.vitalysizov.moviedb.presentation.main.mvp.MainPresenter
 import ru.vitalysizov.moviedb.presentation.main.utils.setupWithNavController
+import javax.inject.Inject
 
-class MainFragment : BaseFragment<MainPresenter>(), IMainView {
+class MainFragment : BaseFragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override val layoutId: Int
         get() = R.layout.fragment_main
-
-    override fun performInject() {
-        DaggerMainComponent.builder()
-            .mainDependencies(findComponentDependencies())
-            .build()
-            .inject(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +25,7 @@ class MainFragment : BaseFragment<MainPresenter>(), IMainView {
 
     private fun initBottomNavigation() {
         val navigationAdapter =
-            AHBottomNavigationAdapter(appActivity, R.menu.bottom_navigation_menu)
+            AHBottomNavigationAdapter(activity, R.menu.bottom_navigation_menu)
         navigationAdapter.setupWithBottomNavigation(main_bottom_navigation)
 
         val navGraphIds = listOf(
