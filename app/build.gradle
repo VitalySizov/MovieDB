@@ -14,6 +14,11 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField 'String', 'BASE_API_URL', '"https://api.themoviedb.org/3/"'
+        buildConfigField 'String', 'API_KEY', '"13847aa040037f1de9e84ea1f853d0fb"'
+
+        buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/w500"'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -22,6 +27,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding {
+        enabled = true
     }
 
     compileOptions {
@@ -32,7 +40,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
 }
 
 dependencies {
@@ -45,20 +52,17 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${versions.androidxConstraint}"
     implementation "androidx.recyclerview:recyclerview:${versions.androidxRecycler}"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
 
     // Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
-
-    // Moxy
-    implementation "com.github.moxy-community:moxy:${versions.moxy}"
-    implementation "com.github.moxy-community:moxy-androidx:${versions.moxy}"
-    implementation "com.github.moxy-community:moxy-ktx:${versions.moxy}"
-    kapt "com.github.moxy-community:moxy-compiler:${versions.moxy}"
 
     // Rx
     implementation "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
@@ -68,8 +72,30 @@ dependencies {
     implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
 
     // dagger2
-    compileOnly 'javax.annotation:jsr250-api:1.0'
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.httpLogging}"
+
+    // Groupie
+    implementation "com.xwray:groupie:${versions.groupie}"
+    implementation "com.xwray:groupie-databinding:${versions.groupie}"
+    implementation "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"
+
+    // Koil (image loading library)
+    implementation "io.coil-kt:coil:${versions.koil}"
+
+    // Utils
+    implementation "com.blankj:utilcodex:${versions.utils}"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

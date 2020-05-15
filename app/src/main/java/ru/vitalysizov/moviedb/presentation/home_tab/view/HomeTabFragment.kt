@@ -1,20 +1,50 @@
 package ru.vitalysizov.moviedb.presentation.home_tab.view
 
+import android.os.Bundle
+import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import ru.vitalysizov.moviedb.R
-import ru.vitalysizov.moviedb.di.base.findComponentDependencies
+import ru.vitalysizov.moviedb.databinding.FragmentHomeTabBinding
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
-import ru.vitalysizov.moviedb.presentation.home_tab.di.DaggerHomeTabComponent
-import ru.vitalysizov.moviedb.presentation.home_tab.mvp.HomeTabPresenter
+import ru.vitalysizov.moviedb.presentation.home_tab.view.items.HomeTabSection
+import ru.vitalysizov.moviedb.presentation.home_tab.viewmodel.HomeTabViewModel
+import javax.inject.Inject
 
-class HomeTabFragment : BaseFragment<HomeTabPresenter>(), IHomeTabView {
+class HomeTabFragment : BaseFragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val homeTabViewModel: HomeTabViewModel by viewModels(
+        ownerProducer = { requireParentFragment() },
+        factoryProducer = { viewModelFactory }
+    )
+
+    private val homeTabSection: HomeTabSection by lazy {
+        HomeTabSection(this, homeTabViewModel)
+    }
 
     override val layoutId: Int
-        get() = R.layout.fragment_main_tab
+        get() = R.layout.fragment_home_tab
 
-    override fun performInject() {
-        DaggerHomeTabComponent.builder()
-            .homeTabDependencies(findComponentDependencies())
-            .build()
-            .inject(this)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = DataBindingUtil.bind<FragmentHomeTabBinding>(view) ?: return
+        initRecyclerView(binding)
+    }
+
+    private fun initRecyclerView(binding: FragmentHomeTabBinding) {
+        val linearLayoutManager = LinearLayoutManager(context)
+        val groupAdapter = GroupAdapter<GroupieViewHolder>().apply {
+            add(homeTabSection)
+        }
+        binding.rvHome.layoutManager = linearLayoutManager
+        binding.rvHome.adapter = groupAdapter
+
     }
 }
