@@ -15,10 +15,11 @@ import ru.vitalysizov.moviedb.domain.useCase.movies.LoadPopularMoviesUseCase
 import ru.vitalysizov.moviedb.domain.useCase.movies.LoadTrendingMoviesUseCase
 import ru.vitalysizov.moviedb.model.domain.GenreItem
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
-import ru.vitalysizov.moviedb.presentation.base.viewmodel.BaseViewModel
 import ru.vitalysizov.moviedb.presentation.base.view.items.HeaderAdapterItem
 import ru.vitalysizov.moviedb.presentation.base.view.items.SpaceAdapterItem
+import ru.vitalysizov.moviedb.presentation.base.viewmodel.BaseViewModel
 import ru.vitalysizov.moviedb.presentation.home_tab.view.items.*
+import ru.vitalysizov.moviedb.utils.Event
 import ru.vitalysizov.moviedb.utils.ioToUi
 import javax.inject.Inject
 
@@ -51,6 +52,12 @@ class HomeTabViewModel @Inject constructor(
 
     var uiItems = MutableLiveData<List<Group>>()
     val loadItems: LiveData<List<Group>> = uiItems
+
+    private val _click = MutableLiveData<Event<Int>>()
+
+    val click: LiveData<Event<Int>>
+        get() = _click
+
 
 
     private fun loadNowPlayingMovies(): Single<List<MovieItem>> {
@@ -185,7 +192,7 @@ class HomeTabViewModel @Inject constructor(
         val listItems = listOf(
             headerMoviesAdapterItem,
             carouselMoviesAdapterItem,
-            HeaderAdapterItem(),
+            HeaderAdapterItem(R.string.genres_header),
             carouselGenresAdapterItem,
             headerTrendingMoviesAdapterItem,
             carouselMoviesTrendingAdapterItem,
@@ -202,8 +209,12 @@ class HomeTabViewModel @Inject constructor(
 
     private fun getMoviesAdapterItems(items: List<MovieItem>): ArrayList<Item> {
         val moviesItems = arrayListOf<Item>()
-        items.forEach { item -> moviesItems.add(MovieAdapterItem(item)) }
+        items.forEach { item -> moviesItems.add(MovieAdapterItem(item, this::actionDetails)) }
         return moviesItems
+    }
+
+    private fun actionDetails(movieId: Int) {
+        _click.value = Event(movieId)
     }
 
     private fun getTrendingMoviesAdapterItems(items: List<MovieItem>): ArrayList<Item> {

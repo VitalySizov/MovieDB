@@ -13,12 +13,7 @@ class HomeTabSection(
 
     init {
         homeTabViewModel.loadItems.observe(lifecycleOwner) { items ->
-            updateResult(items)
+            update(items)
         }
     }
-
-    private fun updateResult(items: List<Group>) {
-        update(items)
-    }
-
 }

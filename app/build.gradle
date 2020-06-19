@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -91,6 +92,9 @@ dependencies {
 
     // Koil (image loading library)
     implementation "io.coil-kt:coil:${versions.koil}"
+
+    // ThreeTenABP (Time)
+    implementation "com.jakewharton.threetenabp:threetenabp:${versions.threeTenABP}"
 
     // Utils
     implementation "com.blankj:utilcodex:${versions.utils}"

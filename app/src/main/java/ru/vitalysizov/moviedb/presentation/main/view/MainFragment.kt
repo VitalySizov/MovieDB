@@ -24,17 +24,16 @@ class MainFragment : BaseFragment() {
     }
 
     private fun initBottomNavigation() {
-        val navigationAdapter =
-            AHBottomNavigationAdapter(activity, R.menu.bottom_navigation_menu)
+        val navigationAdapter = AHBottomNavigationAdapter(activity, R.menu.bottom_navigation_menu)
         navigationAdapter.setupWithBottomNavigation(main_bottom_navigation)
 
         val navGraphIds = listOf(
-            R.navigation.nav_main_tab_graph,
+            R.navigation.nav_home_tab_graph,
             R.navigation.nav_search_tab_graph,
             R.navigation.nav_account_tab_graph
         )
         val bottomItemIds = listOf(
-            R.id.main_tab,
+            R.id.home_tab,
             R.id.search_tab,
             R.id.account_tab
         )
