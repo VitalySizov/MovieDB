@@ -14,8 +14,7 @@ class CarouselGenresAdapterItem(private val genresItems: List<Item>) : Item() {
     private val genresAdapterItem = GroupieAdapter()
 
     override fun createViewHolder(itemView: View): GroupieViewHolder {
-        val linearLayoutManager =
-            LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+        val linearLayoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
         return super.createViewHolder(itemView.apply {
             rv_carousel_genres.layoutManager = linearLayoutManager
         })

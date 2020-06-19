@@ -6,12 +6,22 @@
     <string name="search_tab">Search</string>
     <string name="account_tab">Account</string>
 
-    <string name="now_in_theaters_header">In Theaters</string>
-    <string name="populars_header">Populars</string>
+    <string name="now_in_theaters_header">В кинотеатрах</string>
+    <string name="populars_header">Популярное</string>
     <string name="whats_popular_header">What\'s Popular</string>
-    <string name="genres_header">Genres</string>
-    <string name="trending_header">Trending</string>
-    <string name="day">Day</string>
-    <string name="week">Week</string>
+    <string name="genres_header">Жанры</string>
+    <string name="trending_header">Популярное</string>
+    <string name="day">День</string>
+    <string name="week">Неделя</string>
+    <string name="cast_header">В главных ролях</string>
+    <string name="cast_all">Все роли</string>
+
+    <string name="title_mask">%s / %s</string>
+    <string name="hours_and_minutes_mask">%dч %dмин</string>
+    <string name="title_and_year_mask">%s (%s)</string>
+    <string name="cast_mask">%s \n%s</string>
+
+    <string name="directors">Режиссеры</string>
+    <string name="writers">Сценаристы</string>
 
 </resources>

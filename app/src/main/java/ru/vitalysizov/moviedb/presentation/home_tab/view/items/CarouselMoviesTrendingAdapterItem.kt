@@ -2,9 +2,7 @@ package ru.vitalysizov.moviedb.presentation.home_tab.view.items
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_carousel_trending.view.*
@@ -16,11 +14,14 @@ class CarouselMoviesTrendingAdapterItem(private val moviesItems: ArrayList<Item>
     private val trendingMoviesAdapter = GroupieAdapter()
 
     override fun createViewHolder(itemView: View): GroupieViewHolder {
-        val linearLayoutManager =
-            LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+        val layoutManager = LinearLayoutManager(
+            itemView.context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         return super.createViewHolder(itemView.apply {
-            rv_carousel_trending.layoutManager = linearLayoutManager
-            val snapHelper: SnapHelper = LinearSnapHelper()
+            rv_carousel_trending.layoutManager = layoutManager
+            val snapHelper = PagerSnapHelper()
             snapHelper.attachToRecyclerView(rv_carousel_trending)
         })
     }

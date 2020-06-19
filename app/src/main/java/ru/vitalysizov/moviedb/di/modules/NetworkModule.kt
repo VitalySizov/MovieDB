@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.vitalysizov.moviedb.BuildConfig
 import ru.vitalysizov.moviedb.data.remote.network.api.IMovieDbApiService
 import ru.vitalysizov.moviedb.data.remote.network.interceptors.AddDefaultParametersInterceptor
+import ru.vitalysizov.moviedb.data.remote.network.interceptors.IncludeImageLanguageInterceptor
 import javax.inject.Singleton
 
 @Module
@@ -27,11 +28,13 @@ class NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        addDefaultParametersInterceptor: AddDefaultParametersInterceptor
+        addDefaultParametersInterceptor: AddDefaultParametersInterceptor,
+        includeImageLanguageInterceptor: IncludeImageLanguageInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(addDefaultParametersInterceptor)
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(includeImageLanguageInterceptor)
             .build()
     }
 
