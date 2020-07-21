@@ -1,5 +1,9 @@
 package ru.vitalysizov.moviedb.presentation.search_tab.view
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import ru.vitalysizov.moviedb.R
@@ -17,7 +21,11 @@ class SearchTabFragment : BaseFragment() {
         factoryProducer = { viewModelFactory }
     )
 
-    override val layoutId: Int
-        get() = R.layout.fragment_search_tab
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_search_tab, container, false)
+    }
 }

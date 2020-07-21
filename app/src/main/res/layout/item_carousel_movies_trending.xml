@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="ru.vitalysizov.moviedb.model.domain.movies.MovieItem" />
+
         <variable
-            name="genresCategory"
-            type="ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.GenresCategory" />
+            name="moviesCategory"
+            type="ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.MoviesCategory" />
+
+        <variable
+            name="listener"
+            type="ru.vitalysizov.moviedb.presentation.base.ItemClickListener&lt;MovieItem>" />
+
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -18,13 +26,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_default"
             android:layout_marginTop="@dimen/padding_small"
-            android:text="@string/genres_title"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="@{context.getString(moviesCategory.title)}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_20"
+            tools:text="Популярное" />
 
         <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/rvCarouselGenres"
+            android:id="@+id/rvCarouselMoviesTrending"
+            setTrendingMovieListener="@{listener}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_small"
@@ -33,8 +42,8 @@
             android:paddingStart="@dimen/padding_default"
             android:paddingEnd="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:setGenres="@{genresCategory.genres}"
-            tools:listitem="@layout/item_genre" />
+            app:setTrendingMovies="@{moviesCategory.movies}"
+            tools:listitem="@layout/item_movie_trending" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

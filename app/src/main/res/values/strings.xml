@@ -23,5 +23,6 @@
 
     <string name="directors">Режиссеры</string>
     <string name="writers">Сценаристы</string>
+    <string name="genres_title">Жанры</string>
 
 </resources>
