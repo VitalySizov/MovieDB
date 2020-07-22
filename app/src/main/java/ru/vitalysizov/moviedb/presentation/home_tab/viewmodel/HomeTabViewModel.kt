@@ -12,8 +12,8 @@ import ru.vitalysizov.moviedb.domain.useCase.movies.LoadTrendingMoviesUseCase
 import ru.vitalysizov.moviedb.model.domain.GenreItem
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
 import ru.vitalysizov.moviedb.presentation.base.viewmodel.BaseViewModel
-import ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.MoviesCategory
 import ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.GenresCategory
+import ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.MoviesCategory
 import ru.vitalysizov.moviedb.utils.Event
 import ru.vitalysizov.moviedb.utils.ioToUi
 import javax.inject.Inject
@@ -35,6 +35,7 @@ class HomeTabViewModel @Inject constructor(
         get() = _click
 
     init {
+        showLoading()
         loadHomeTabContent()
     }
 
@@ -64,8 +65,12 @@ class HomeTabViewModel @Inject constructor(
                         genres
                     )
                 }).subscribe({
+                hideLoading()
                 handleSuccessLoadHomeTabContent(it)
-            }, this::handleError)
+            }, {
+                hideLoading()
+                handleError(it)
+            })
         }
     }
 

@@ -61,7 +61,7 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_tab, container, false)
 
         initHomeTabAdapter(binding)
-        initHomeTabDataObservers()
+        initHomeTabDataObservers(binding)
         initMovieClickObserver()
 
         return binding.root
@@ -89,7 +89,11 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
         })
     }
 
-    private fun initHomeTabDataObservers() {
+    private fun initHomeTabDataObservers(binding: FragmentHomeTabBinding) {
+        homeTabViewModel.loading.observe(viewLifecycleOwner) { item ->
+            binding.loading = item
+        }
+
         homeTabViewModel.inTheatersMoviesCategory.observe(viewLifecycleOwner) { items ->
             items.let {
                 inTheatersMoviesAdapter.submitList(it)

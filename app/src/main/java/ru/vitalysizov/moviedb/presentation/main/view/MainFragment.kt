@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -32,7 +33,12 @@ class MainFragment : BaseFragment() {
 
     private fun initBottomNavigation() {
         val navigationAdapter = AHBottomNavigationAdapter(activity, R.menu.bottom_navigation_menu)
-        navigationAdapter.setupWithBottomNavigation(main_bottom_navigation)
+
+        val mainBottomNavigation = main_bottom_navigation
+        mainBottomNavigation.accentColor =
+            ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+
+        navigationAdapter.setupWithBottomNavigation(mainBottomNavigation)
 
         val navGraphIds = listOf(
             R.navigation.nav_home_tab_graph,

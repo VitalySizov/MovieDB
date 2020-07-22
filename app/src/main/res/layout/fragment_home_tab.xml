@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-            name="homeTabViewModel"
-            type="ru.vitalysizov.moviedb.presentation.home_tab.viewmodel.HomeTabViewModel" />
+            name="loading"
+            type="Boolean" />
+
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -14,7 +16,9 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <include layout="@layout/center_loading_container" />
+        <include
+            layout="@layout/center_loading_container"
+            app:loading="@{loading}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHome"
