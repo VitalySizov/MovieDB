@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="100dp"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/padding_small"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
-    android:orientation="vertical">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivCastPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="140dp"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/backgrounds/scenic" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvCast"
-        android:layout_width="wrap_content"
+        <variable
+            name="castItem"
+            type="ru.vitalysizov.moviedb.model.domain.castAndCrew.CastItem" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:minLines="3"
-        tools:text="Adam Sandler" />
+        android:layout_marginEnd="@dimen/padding_small"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCastPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            app:loadPersonPhoto="@{castItem.profilePath}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:minLines="3"
+            app:setActorNameAndCharacter="@{castItem}"
+            tools:text="Adam Sandler" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

@@ -2,16 +2,26 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.vitalysizov.moviedb.presentation.home_tab.viewmodel.HomeTabViewModel" />
+
+    </data>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
 
-        <include layout="@layout/center_loading_container" />
+        <include
+            layout="@layout/center_loading_container"
+            app:loading="@{viewModel.loading}" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home"
+            android:id="@+id/rvHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

@@ -7,18 +7,18 @@ import ru.vitalysizov.moviedb.model.network.responses.base.BaseResponse
 import ru.vitalysizov.moviedb.model.network.responses.genres.GenresResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieImagesResponse
-import ru.vitalysizov.moviedb.model.network.responses.movies.MovieResponse
+import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastAndCrewResponse
 
 class MoviesRepository(
     private val apiService: IMovieDbApiService
 ) : IMoviesRepository {
 
-    override fun loadNowPlayingMovies(): Single<BaseResponse<MovieResponse>> {
+    override fun loadNowPlayingMovies(): Single<BaseResponse<MovieItemResponse>> {
         return apiService.loadNowPlayingMovies()
     }
 
-    override fun loadPopularMovies(): Single<BaseResponse<MovieResponse>> {
+    override fun loadPopularMovies(): Single<BaseResponse<MovieItemResponse>> {
         return apiService.loadPopularMovies()
     }
 

@@ -6,22 +6,41 @@
     <string name="search_tab">Search</string>
     <string name="account_tab">Account</string>
 
+    <!-- Домашний экран -->
     <string name="now_in_theaters_header">В кинотеатрах</string>
+    <string name="genres_title">Жанры</string>
     <string name="populars_header">Популярное</string>
-    <string name="whats_popular_header">What\'s Popular</string>
     <string name="genres_header">Жанры</string>
     <string name="trending_header">Популярное</string>
     <string name="day">День</string>
     <string name="week">Неделя</string>
+
+    <!-- Детализация фильма -->
     <string name="cast_header">В главных ролях</string>
     <string name="cast_all">Все роли</string>
-
     <string name="title_mask">%s / %s</string>
     <string name="hours_and_minutes_mask">%dч %dмин</string>
     <string name="title_and_year_mask">%s (%s)</string>
+    <string name="title_and_year_mask_second_variant">%s, %s</string>
+    <string name="title_mask_usual">%s</string>
     <string name="cast_mask">%s \n%s</string>
-
     <string name="directors">Режиссеры</string>
     <string name="writers">Сценаристы</string>
+    <string name="header_directors">Режиссёры</string>
+    <string name="header_writers">Сценаристы</string>
+    <string name="all_cast_and_crew">Все актёры и съемочная группа</string>
+
+    <!-- Поиск -->
+    <string name="search_hint">Фильмы, сериалы, персоны</string>
+    <string name="header_found_films">Найденные фильмы</string>
+    <string name="header_found_tv_shows">Найденные сериалы</string>
+    <string name="header_found_persons">Найденные персоны</string>
+    <string name="header_found_company">Найденные компании</string>
+    <string name="header_found_collection">Найденные коллекции</string>
+    <string name="header_found_keywords">Найденные ключевые слова</string>
+    <string name="all_search_mask">Все результаты: %d</string>
+    <string name="search_title_mask">Поиск: %s</string>
+    <string name="to_results">К результатам</string>
+    <string name="noting_found">Ничего не нашлось</string>
 
 </resources>

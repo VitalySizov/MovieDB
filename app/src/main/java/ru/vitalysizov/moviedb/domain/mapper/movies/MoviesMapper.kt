@@ -1,12 +1,13 @@
 package ru.vitalysizov.moviedb.domain.mapper.movies
 
+import org.threeten.bp.LocalDate
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
-import ru.vitalysizov.moviedb.model.network.responses.movies.MovieResponse
+import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
 import javax.inject.Inject
 
-class MoviesMapper @Inject constructor() : Mapper<MovieResponse, MovieItem> {
-    override fun map(from: MovieResponse): MovieItem {
+class MoviesMapper @Inject constructor() : Mapper<MovieItemResponse, MovieItem> {
+    override fun map(from: MovieItemResponse): MovieItem {
         return MovieItem(
             popularity = from.popularity ?: 0.0,
             voteCount = from.voteCount ?: 0,
@@ -18,10 +19,14 @@ class MoviesMapper @Inject constructor() : Mapper<MovieResponse, MovieItem> {
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
             genreIds = from.genreIds ?: listOf(),
-            releaseDate = from.releaseDate.orEmpty(),
+            releaseDate = if (from.releaseDate != null) {
+                LocalDate.parse(from.releaseDate)
+            } else {
+                LocalDate.of(0, 1, 1)
+            },
             overview = from.overview.orEmpty(),
             title = from.title.orEmpty(),
-            voteAverage = from.voteAverage ?: 0.0
+            voteAverage = from.voteAverage.toString()
         )
     }
 }

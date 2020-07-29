@@ -43,10 +43,15 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // androidx and material
     implementation "androidx.appcompat:appcompat:${versions.androidxAppCompat}"
     implementation "com.google.android.material:material:${versions.materialDesign}"
     implementation "androidx.core:core-ktx:${versions.androidxCore}"
@@ -56,9 +61,11 @@ dependencies {
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:${versions.lifecycle}"
     kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:${versions.lifecycle}"
 
     // Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:$versions.navigation"
@@ -75,9 +82,9 @@ dependencies {
     // dagger2
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-    implementation "com.google.dagger:dagger-android:${versions.dagger}"
-    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
-    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android:${versions.daggerAndroid}"
+    implementation "com.google.dagger:dagger-android-support:${versions.daggerAndroid}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.daggerAndroid}"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
@@ -85,21 +92,16 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.httpLogging}"
 
-    // Groupie
-    implementation "com.xwray:groupie:${versions.groupie}"
-    implementation "com.xwray:groupie-databinding:${versions.groupie}"
-    implementation "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"
-
     // Koil (image loading library)
     implementation "io.coil-kt:coil:${versions.koil}"
 
     // ThreeTenABP (Time)
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.threeTenABP}"
 
-    // Utils
-    implementation "com.blankj:utilcodex:${versions.utils}"
+    // KeyboardVisibilityEvent
+    implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${versions.keyboardVisibilityEvent}"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

@@ -1,32 +1,51 @@
 package ru.vitalysizov.moviedb.data.remote.network.api
 
+import com.google.gson.JsonObject
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import ru.vitalysizov.moviedb.model.network.responses.base.BaseResponse
+import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastAndCrewResponse
+import ru.vitalysizov.moviedb.model.network.responses.collections.CollectionItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.companies.CompanyItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.genres.GenresResponse
+import ru.vitalysizov.moviedb.model.network.responses.keywords.KeywordItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieImagesResponse
-import ru.vitalysizov.moviedb.model.network.responses.movies.MovieResponse
-import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastAndCrewResponse
+import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.persons.PersonItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
 
 interface IMovieDbApiService {
 
+    /**
+     * Movies
+     */
     @GET("movie/now_playing")
-    fun loadNowPlayingMovies(): Single<BaseResponse<MovieResponse>>
+    fun loadNowPlayingMovies(): Single<BaseResponse<MovieItemResponse>>
 
     @GET("movie/popular")
-    fun loadPopularMovies(): Single<BaseResponse<MovieResponse>>
+    fun loadPopularMovies(): Single<BaseResponse<MovieItemResponse>>
 
+    /**
+     * Genres
+     */
     @GET("genre/movie/list")
     fun loadMoviesGenres(): Single<GenresResponse>
 
+    /**
+     * Trending
+     */
     @GET("trending/{mediaType}/{timeWindow}")
     fun loadTrendingItems(
         @Path("mediaType") mediaType: String,
         @Path("timeWindow") timeWindow: String
-    ): Single<BaseResponse<MovieResponse>>
+    ): Single<BaseResponse<MovieItemResponse>>
 
+    /**
+     * Movie details
+     */
     @GET("movie/{movie_id}")
     fun loadMovieDetails(
         @Path("movie_id") movieId: Int
@@ -42,4 +61,58 @@ interface IMovieDbApiService {
         @Path("movie_id") movieId: Int
     ): Single<CastAndCrewResponse>
 
+    /**
+     * Search
+     */
+    @GET("search/movie")
+    fun searchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("region") region: String,
+        @Query("year") year: Int,
+        @Query("primary_release_year") primaryReleaseYear: Int
+    ): Single<BaseResponse<MovieItemResponse>>
+
+    @GET("search/person")
+    fun searchPersons(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("region") region: String
+    ): Single<BaseResponse<PersonItemResponse>>
+
+    @GET("search/company")
+    fun searchCompanies(
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): Single<BaseResponse<CompanyItemResponse>>
+
+    @GET("search/tv")
+    fun searchTvShow(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("first_air_date_year") firstAirDateYear: Int
+    ): Single<BaseResponse<TvShowItemResponse>>
+
+    @GET("search/collection")
+    fun searchCollection(
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): Single<BaseResponse<CollectionItemResponse>>
+
+    @GET("search/keyword")
+    fun searchKeyWord(
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): Single<BaseResponse<KeywordItemResponse>>
+
+    @GET("search/multi")
+    fun searchMulti(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("region") region: String
+    ): Single<BaseResponse<JsonObject>>
 }

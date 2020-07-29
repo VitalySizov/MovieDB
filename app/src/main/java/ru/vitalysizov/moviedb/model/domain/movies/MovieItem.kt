@@ -1,5 +1,7 @@
 package ru.vitalysizov.moviedb.model.domain.movies
 
+import org.threeten.bp.LocalDate
+
 data class MovieItem(
     val popularity: Double,
     val voteCount: Int,
@@ -12,7 +14,7 @@ data class MovieItem(
     val originalLanguage: String,
     val originalTitle: String,
     val genreIds: List<Int>,
-    val releaseDate: String,
+    val releaseDate: LocalDate,
     val title: String,
-    val voteAverage: Double
+    val voteAverage: String
 )
