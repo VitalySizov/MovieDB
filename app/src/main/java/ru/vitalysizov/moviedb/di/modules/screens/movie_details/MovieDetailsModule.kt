@@ -1,8 +1,8 @@
-package ru.vitalysizov.moviedb.di.modules.screens
+package ru.vitalysizov.moviedb.di.modules.screens.movie_details
 
 import dagger.Module
 import dagger.Provides
-import ru.vitalysizov.moviedb.di.modules.screens.MovieDetailsModule.Params.MOVIE_ID
+import ru.vitalysizov.moviedb.di.modules.screens.movie_details.MovieDetailsModule.Params.MOVIE_ID
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragment
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragmentArgs
 import javax.inject.Named

@@ -25,14 +25,25 @@ class HomeTabViewModel @Inject constructor(
     private val loadTrendingMoviesUseCase: LoadTrendingMoviesUseCase
 ) : BaseViewModel() {
 
-    val inTheatersMoviesCategory = MutableLiveData<List<MoviesCategory>>()
-    val popMoviesCategory = MutableLiveData<List<MoviesCategory>>()
-    val genresCategory = MutableLiveData<List<GenresCategory>>()
-    val moviesTrendingCategory = MutableLiveData<List<MoviesCategory>>()
+    private val _inTheatersMoviesCategory = MutableLiveData<List<MoviesCategory>>()
+    val inTheatersMoviesCategory: LiveData<List<MoviesCategory>>
+        get() = _inTheatersMoviesCategory
 
-    private val _click = MutableLiveData<Event<Int>>()
-    val click: LiveData<Event<Int>>
-        get() = _click
+    private val _popMoviesCategory = MutableLiveData<List<MoviesCategory>>()
+    val popMoviesCategory: LiveData<List<MoviesCategory>>
+        get() = _popMoviesCategory
+
+    private val _genresCategory = MutableLiveData<List<GenresCategory>>()
+    val genresCategory: LiveData<List<GenresCategory>>
+        get() = _genresCategory
+
+    private val _moviesTrendingCategory = MutableLiveData<List<MoviesCategory>>()
+    val moviesTrendingCategory: LiveData<List<MoviesCategory>>
+        get() = _moviesTrendingCategory
+
+    private val _movieDetailsClick = MutableLiveData<Event<Int>>()
+    val movieDetailsClick: LiveData<Event<Int>>
+        get() = _movieDetailsClick
 
     init {
         showLoading()
@@ -68,32 +79,31 @@ class HomeTabViewModel @Inject constructor(
                 hideLoading()
                 handleSuccessLoadHomeTabContent(it)
             }, {
-                hideLoading()
                 handleError(it)
             })
         }
     }
 
     private fun handleSuccessLoadHomeTabContent(homeTabContent: HomeTabContent) {
-        inTheatersMoviesCategory.value = listOf(
+        _inTheatersMoviesCategory.value = listOf(
             MoviesCategory(
                 title = R.string.now_in_theaters_header,
                 movies = homeTabContent.nowPlayingMovies
             )
         )
 
-        popMoviesCategory.value = listOf(
+        _popMoviesCategory.value = listOf(
             MoviesCategory(
                 title = R.string.populars_header,
                 movies = homeTabContent.popularMovies
             )
         )
 
-        genresCategory.value = listOf(
+        _genresCategory.value = listOf(
             GenresCategory(homeTabContent.genres)
         )
 
-        moviesTrendingCategory.value = listOf(
+        _moviesTrendingCategory.value = listOf(
             MoviesCategory(
                 R.string.populars_header,
                 homeTabContent.trendingMoviesByDay
@@ -101,8 +111,8 @@ class HomeTabViewModel @Inject constructor(
         )
     }
 
-    fun actionDetails(movieId: Int) {
-        _click.value = Event(movieId)
+    fun setMovieDetailsClick(movieId: Int) {
+        _movieDetailsClick.value = Event(movieId)
     }
 }
 

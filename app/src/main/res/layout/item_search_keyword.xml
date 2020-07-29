@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="keywordItem"
+            type="ru.vitalysizov.moviedb.model.domain.keywords.KeywordItem" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_default"
+            android:layout_marginTop="@dimen/padding_default"
+            android:layout_marginBottom="@dimen/padding_default"
+            android:text="@{keywordItem.name}"
+            android:textColor="@color/black"
+            tools:text="Keyword" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

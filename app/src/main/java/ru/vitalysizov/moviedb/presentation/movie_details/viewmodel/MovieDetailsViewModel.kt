@@ -1,9 +1,10 @@
 package ru.vitalysizov.moviedb.presentation.movie_details.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Single
 import io.reactivex.functions.Function3
-import ru.vitalysizov.moviedb.di.modules.screens.MovieDetailsModule
+import ru.vitalysizov.moviedb.di.modules.screens.movie_details.MovieDetailsModule
 import ru.vitalysizov.moviedb.domain.useCase.castAndCrew.LoadCastAndCrewUseCase
 import ru.vitalysizov.moviedb.domain.useCase.movies.details.LoadMovieDetailsUseCase
 import ru.vitalysizov.moviedb.domain.useCase.movies.details.LoadMovieImagesUseCase
@@ -26,9 +27,17 @@ class MovieDetailsViewModel @Inject constructor(
         const val TEN_CAST_ACTORS = 10
     }
 
-    val backDropImages = MutableLiveData<List<MovieImages>>()
-    val movieDetails = MutableLiveData<List<MovieDetailsItem>>()
-    val castAndCrew = MutableLiveData<List<CastAndCrewItem>>()
+    private val _backDropImages = MutableLiveData<List<MovieImages>>()
+    val backDropImages: LiveData<List<MovieImages>>
+        get() = _backDropImages
+
+    private val _movieDetails = MutableLiveData<List<MovieDetailsItem>>()
+    val movieDetails: LiveData<List<MovieDetailsItem>>
+        get() = _movieDetails
+
+    private val _castAndCrew = MutableLiveData<List<CastAndCrewItem>>()
+    val castAndCrew: LiveData<List<CastAndCrewItem>>
+        get() = _castAndCrew
 
     init {
         loadMovieDetails(movieId)
@@ -36,6 +45,7 @@ class MovieDetailsViewModel @Inject constructor(
 
     private fun loadMovieDetails(movieId: Int) {
         launch {
+            showLoading()
             Single.zip(loadMovieDetailsUseCase.invoke(movieId).ioToUi(),
                 loadMovieImagesUseCase.invoke(movieId).ioToUi(),
                 loadCastAndCrewUseCase.invoke(movieId).ioToUi(),
@@ -47,7 +57,10 @@ class MovieDetailsViewModel @Inject constructor(
                         movieImages = movieImages,
                         castAndCrew = castAndCrew
                     )
-                }).subscribe(this::handleSuccessLoadMovieDetailsContent) { this.handleError(it) }
+                }).subscribe({
+                hideLoading()
+                handleSuccessLoadMovieDetailsContent(it)
+            }) { this.handleError(it) }
         }
     }
 
@@ -57,9 +70,9 @@ class MovieDetailsViewModel @Inject constructor(
         val modifyCastAndCrew =
             CastAndCrewItem(currentCastAndCrew.id, takeFirstTenCast, currentCastAndCrew.crew)
 
-        backDropImages.value = listOf(movieDetailsContent.movieImages)
-        movieDetails.value = listOf(movieDetailsContent.movieDetails)
-        castAndCrew.value = listOf(modifyCastAndCrew)
+        _backDropImages.value = listOf(movieDetailsContent.movieImages)
+        _movieDetails.value = listOf(movieDetailsContent.movieDetails)
+        _castAndCrew.value = listOf(modifyCastAndCrew)
     }
 }
 

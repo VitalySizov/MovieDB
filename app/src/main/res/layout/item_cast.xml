@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="140dp"
             android:scaleType="centerCrop"
-            app:loadCastPhoto="@{castItem.profilePath}"
+            app:loadPersonPhoto="@{castItem.profilePath}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -1,4 +1,4 @@
-package ru.vitalysizov.moviedb.di.modules.screens
+package ru.vitalysizov.moviedb.di.modules.screens.main
 
 import androidx.lifecycle.ViewModel
 import dagger.Binds

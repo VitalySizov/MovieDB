@@ -2,7 +2,7 @@ package ru.vitalysizov.moviedb.model.network.responses.movies
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieResponse(
+data class MovieItemResponse(
 
     @SerializedName("popularity")
     val popularity: Double?,

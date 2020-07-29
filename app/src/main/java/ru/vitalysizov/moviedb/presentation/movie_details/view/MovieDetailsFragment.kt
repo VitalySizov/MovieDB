@@ -39,6 +39,9 @@ class MovieDetailsFragment : BaseFragment() {
         val binding: FragmentMovieDetailsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
 
+        binding.lifecycleOwner = this
+        binding.viewModel = movieDetailsViewModel
+
         initMovieDetailsAdapters(binding)
         initMovieDetailsDataObservers()
 

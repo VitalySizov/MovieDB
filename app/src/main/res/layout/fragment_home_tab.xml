@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="loading"
-            type="Boolean" />
+            name="viewModel"
+            type="ru.vitalysizov.moviedb.presentation.home_tab.viewmodel.HomeTabViewModel" />
 
     </data>
 
@@ -18,7 +18,7 @@
 
         <include
             layout="@layout/center_loading_container"
-            app:loading="@{loading}" />
+            app:loading="@{viewModel.loading}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHome"

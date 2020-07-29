@@ -17,5 +17,5 @@ data class BaseResponse<T>(
     val totalPages: Int?,
 
     @SerializedName("dates")
-    val dates: Dates?
+    val dates: DatesResponse?
 )

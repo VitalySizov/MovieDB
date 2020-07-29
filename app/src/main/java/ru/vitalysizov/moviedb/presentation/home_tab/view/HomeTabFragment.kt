@@ -61,8 +61,11 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_tab, container, false)
 
         initHomeTabAdapter(binding)
-        initHomeTabDataObservers(binding)
+        initHomeTabDataObservers()
         initMovieClickObserver()
+
+        binding.lifecycleOwner = this
+        binding.viewModel = homeTabViewModel
 
         return binding.root
     }
@@ -78,7 +81,7 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
     }
 
     private fun initMovieClickObserver() {
-        homeTabViewModel.click.observe(viewLifecycleOwner, Observer { item ->
+        homeTabViewModel.movieDetailsClick.observe(viewLifecycleOwner, Observer { item ->
             item.getContentIfNotHandled()?.let {
                 val args = MovieDetailsFragmentArgs(it)
                 findNavController().navigate(
@@ -89,11 +92,7 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
         })
     }
 
-    private fun initHomeTabDataObservers(binding: FragmentHomeTabBinding) {
-        homeTabViewModel.loading.observe(viewLifecycleOwner) { item ->
-            binding.loading = item
-        }
-
+    private fun initHomeTabDataObservers() {
         homeTabViewModel.inTheatersMoviesCategory.observe(viewLifecycleOwner) { items ->
             items.let {
                 inTheatersMoviesAdapter.submitList(it)
@@ -120,6 +119,6 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
     }
 
     override fun onClickListener(item: MovieItem) {
-        homeTabViewModel.actionDetails(item.id)
+        homeTabViewModel.setMovieDetailsClick(item.id)
     }
 }

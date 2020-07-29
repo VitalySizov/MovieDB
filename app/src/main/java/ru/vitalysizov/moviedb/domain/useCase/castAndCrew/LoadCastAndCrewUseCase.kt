@@ -4,7 +4,7 @@ import io.reactivex.Single
 import ru.vitalysizov.moviedb.data.repo.IMoviesRepository
 import ru.vitalysizov.moviedb.domain.mapper.movies.castAndCrew.CastMapper
 import ru.vitalysizov.moviedb.domain.mapper.movies.castAndCrew.CrewMapper
-import ru.vitalysizov.moviedb.domain.useCase.base.BaseSingleUseCase
+import ru.vitalysizov.moviedb.domain.useCase.base.SingleWithParamsUseCase
 import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastAndCrewItem
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ class LoadCastAndCrewUseCase @Inject constructor(
     private val moviesRepository: IMoviesRepository,
     private val castMapper: CastMapper,
     private val crewMapper: CrewMapper
-) : BaseSingleUseCase<Int, CastAndCrewItem>() {
+) : SingleWithParamsUseCase<Int, CastAndCrewItem>() {
 
     override fun invoke(params: Int): Single<CastAndCrewItem> {
         return moviesRepository.loadCastAndCrew(params)
@@ -24,6 +24,4 @@ class LoadCastAndCrewUseCase @Inject constructor(
                 )
             }
     }
-
-    override fun invoke(): Single<CastAndCrewItem> = invoke()
 }

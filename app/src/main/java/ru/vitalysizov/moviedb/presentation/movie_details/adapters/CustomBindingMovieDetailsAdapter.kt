@@ -6,7 +6,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,16 +20,10 @@ import ru.vitalysizov.moviedb.presentation.movie_details.adapters.backDrop.BackD
 import ru.vitalysizov.moviedb.presentation.movie_details.adapters.castAndCrew.CastAndCrewAdapter
 import ru.vitalysizov.moviedb.presentation.movie_details.adapters.posterAndDescription.MovieGenresAdapter
 import ru.vitalysizov.moviedb.utils.gone
-import ru.vitalysizov.moviedb.utils.loadCastPhoto
 
 const val DEPARTMENT_DIRECTING = "Directing"
 const val DEPARTMENT_WRITING = "Writing"
 const val JOB_DIRECTOR = "Director"
-
-@BindingAdapter(value = ["loadCastPhoto"])
-fun loadCastPhoto(imageView: ImageView, url: String) {
-    imageView.loadCastPhoto(url)
-}
 
 @BindingAdapter(value = ["setBackDrop"])
 fun RecyclerView.setRowBackDropImages(items: List<MovieImageItem>) {
@@ -41,10 +34,21 @@ fun RecyclerView.setRowBackDropImages(items: List<MovieImageItem>) {
 
 @BindingAdapter(value = ["setOriginalTitleAndYear"])
 fun TextView.setOriginalTitleAndYear(movieDetails: MovieDetailsItem) {
-    this.text = resources.getString(
-        R.string.title_and_year_mask, movieDetails.originalTitle,
+    val year: String = if (movieDetails.releaseDate.year == 0) {
+        ""
+    } else {
         movieDetails.releaseDate.year.toString()
-    )
+    }
+
+    // Only title or original title with year
+    if (year.isEmpty()) {
+        this.text = resources.getString(R.string.title_mask_usual, movieDetails.originalTitle)
+    } else {
+        this.text = resources.getString(
+            R.string.title_and_year_mask, movieDetails.originalTitle,
+            movieDetails.releaseDate.year.toString()
+        )
+    }
 }
 
 @BindingAdapter(value = ["setProductionCountries"])

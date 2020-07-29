@@ -16,7 +16,7 @@ class CarouselBackDropAdapter : ListAdapter<MovieImages, BaseViewHolder>(Compani
             oldItem: MovieImages,
             newItem: MovieImages
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(

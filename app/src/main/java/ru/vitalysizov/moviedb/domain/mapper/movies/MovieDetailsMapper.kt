@@ -33,7 +33,11 @@ class MovieDetailsMapper @Inject constructor(
             backDropPath = from.backDropPath.orEmpty(),
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
-            releaseDate = LocalDate.parse(from.releaseDate),
+            releaseDate = if (from.releaseDate != null) {
+                LocalDate.parse(from.releaseDate)
+            } else {
+                LocalDate.of(0, 1, 1)
+            },
             title = from.title.orEmpty(),
             voteAverage = from.voteAverage ?: 0.0,
             budget = from.budget ?: 0,

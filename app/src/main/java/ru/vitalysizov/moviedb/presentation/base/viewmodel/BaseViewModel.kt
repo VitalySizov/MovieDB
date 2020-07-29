@@ -19,6 +19,7 @@ abstract class BaseViewModel : ViewModel() {
     fun handleError(t: Throwable) {
         if (BuildConfig.DEBUG) {
             t.printStackTrace()
+            hideLoading()
         }
     }
 
