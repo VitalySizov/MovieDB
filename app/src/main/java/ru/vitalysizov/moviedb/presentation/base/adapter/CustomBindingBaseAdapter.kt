@@ -16,7 +16,7 @@ fun loadImage(imageView: ImageView, url: String) {
 }
 
 @BindingAdapter(value = ["loadPersonPhoto"])
-fun loadPersonPhoto(imageView: ImageView, url: String) {
+fun loadPersonPhoto(imageView: ImageView, url: String?) {
     imageView.loadPersonPhoto(url)
 }
 

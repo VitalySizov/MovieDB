@@ -1,6 +1,7 @@
 package ru.vitalysizov.moviedb.model.network.responses.movies
 
 import com.google.gson.annotations.SerializedName
+import ru.vitalysizov.moviedb.model.network.responses.images.ImageItemResponse
 
 data class MovieImagesResponse(
 
@@ -8,8 +9,8 @@ data class MovieImagesResponse(
     val id: Int?,
 
     @SerializedName("backdrops")
-    val backdrops: List<MovieImageItemResponse>?,
+    val backdrops: List<ImageItemResponse>?,
 
     @SerializedName("posters")
-    val posters: List<MovieImageItemResponse>?
+    val posters: List<ImageItemResponse>?
 )

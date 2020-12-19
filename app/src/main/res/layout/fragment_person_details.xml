@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.vitalysizov.moviedb.presentation.person_details.viewmodel.PersonDetailsViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_default"
+        android:layout_marginEnd="@dimen/padding_default"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_default"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="120dp"
+                    android:layout_height="180dp"
+                    app:loadPersonPhoto="@{viewModel.personContent.personDetails.profilePath}"
+                    tools:src="@android:color/black" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_very_small"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ibFacebook"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="@dimen/padding_very_small"
+                        android:background="@drawable/ic_f_logo_rgb_blue_400"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:setVisibleSocialNetwork="@{viewModel.personContent.personExternalIds.faceBookId}" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ibInstagram"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="@dimen/padding_very_small"
+                        android:background="@drawable/ic_ig_glyph_fill"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:setVisibleSocialNetwork="@{viewModel.personContent.personExternalIds.instagramId}" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ibTwitter"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/ic_twitter_logo_whiteonblue"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:setVisibleSocialNetwork="@{viewModel.personContent.personExternalIds.twitterId}" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_small"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@{viewModel.personContent.personDetails.name}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvKnowForDepartment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@{viewModel.personContent.personDetails.knowForDepartment}"
+                    android:textSize="@dimen/text_size_16"
+                    tools:text="Acting, Director" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPlaceOfBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@{viewModel.personContent.personDetails.placeOfBirth}"
+                    android:textSize="@dimen/text_size_16"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_16"
+                    app:setYearsOfLife="@{viewModel.personContent.personDetails}"
+                    tools:text="Дата рождения: ..." />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFilmography"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_default"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_person_movie" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

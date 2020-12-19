@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="personCastTvItem"
+            type="ru.vitalysizov.moviedb.model.domain.person.PersonCastTvItem" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/include_item_movie"
+            app:posterPath="@{personCastTvItem.posterPath}"
+            app:title="@{personCastTvItem.name}" />
+
+    </FrameLayout>
+
+</layout>

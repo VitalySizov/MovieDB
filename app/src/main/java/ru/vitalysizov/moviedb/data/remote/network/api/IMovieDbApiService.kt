@@ -14,6 +14,10 @@ import ru.vitalysizov.moviedb.model.network.responses.keywords.KeywordItemRespon
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieImagesResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.people.PeopleDetailsResponse
+import ru.vitalysizov.moviedb.model.network.responses.people.PeopleImagesResponse
+import ru.vitalysizov.moviedb.model.network.responses.people.PersonCombinedCreditsResponse
+import ru.vitalysizov.moviedb.model.network.responses.people.PersonExternalIdsResponse
 import ru.vitalysizov.moviedb.model.network.responses.persons.PersonItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
 
@@ -115,4 +119,28 @@ interface IMovieDbApiService {
         @Query("include_adult") includeAdult: Boolean,
         @Query("region") region: String
     ): Single<BaseResponse<JsonObject>>
+
+    /**
+     * Get the primary person details by id.
+     */
+    @GET("person/{person_id}")
+    fun getPersonDetails(@Path("person_id") personId: Int): Single<PeopleDetailsResponse>
+
+    /**
+     * Get the movie and TV credits together in a single response.
+     */
+    @GET("person/{person_id}/combined_credits")
+    fun getPersonCombinedCredits(@Path("person_id") personId: Int): Single<PersonCombinedCreditsResponse>
+
+    /**
+     * Get the external ids for a person. We currently support the following external sources.
+     */
+    @GET("person/{person_id}/external_ids")
+    fun getExternalIdsSourceForPerson(@Path("person_id") personId: Int): Single<PersonExternalIdsResponse>
+
+    /**
+     * Get the images for a person.
+     */
+    @GET("person/{person_id}/images")
+    fun getImagesForPerson(@Path("person_id") personId: Int): Single<PeopleImagesResponse>
 }

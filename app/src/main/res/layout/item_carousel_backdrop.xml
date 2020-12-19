@@ -5,7 +5,7 @@
 
         <variable
             name="backDrops"
-            type="java.util.List&lt;ru.vitalysizov.moviedb.model.domain.movies.MovieImageItem>" />
+            type="java.util.List&lt;ru.vitalysizov.moviedb.model.domain.images.ImageItem>" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"

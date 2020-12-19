@@ -1,6 +1,6 @@
-package ru.vitalysizov.moviedb.model.domain.movies
+package ru.vitalysizov.moviedb.model.domain.images
 
-data class MovieImageItem(
+data class ImageItem(
     val aspectRatio: Double,
     val filePath: String,
     val height: Int,

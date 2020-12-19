@@ -34,6 +34,10 @@ class SearchTabViewModel @Inject constructor(
     val searchResultsDetailsClick: LiveData<Event<String>>
         get() = _searchResultsDetailsClick
 
+    private val _personDetailsClick = MutableLiveData<Event<Int>>()
+    val personDetailsClick: LiveData<Event<Int>>
+        get() = _personDetailsClick
+
     fun onSearchQueryChanged(query: String?) {
         _currentQuery.value = query
         searchByCurrentQuery()
@@ -76,6 +80,10 @@ class SearchTabViewModel @Inject constructor(
     private fun handleSuccessMultiSearchByQuery(items: BaseItem<Any>) {
         _searchResult.value = items.result
         _isEmpty.value = items.result.isEmpty()
+    }
+
+    fun setPersonDetailsClick(personId: Int) {
+        _personDetailsClick.value = Event(personId)
     }
 
 }

@@ -5,7 +5,7 @@
 
         <variable
             name="image"
-            type="ru.vitalysizov.moviedb.model.domain.movies.MovieImageItem" />
+            type="ru.vitalysizov.moviedb.model.domain.images.ImageItem" />
     </data>
 
     <androidx.appcompat.widget.AppCompatImageView xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,14 +1,14 @@
 package ru.vitalysizov.moviedb.di.modules
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import ru.vitalysizov.moviedb.data.remote.network.api.IMovieDbApiService
 import ru.vitalysizov.moviedb.data.repo.IMoviesRepository
+import ru.vitalysizov.moviedb.data.repo.IPeopleRepository
 import ru.vitalysizov.moviedb.data.repo.ISearchRepository
 import ru.vitalysizov.moviedb.data.repo.ITrendingRepository
 import ru.vitalysizov.moviedb.data.repo.impl.MoviesRepository
+import ru.vitalysizov.moviedb.data.repo.impl.PeopleRepository
 import ru.vitalysizov.moviedb.data.repo.impl.SearchRepository
 import ru.vitalysizov.moviedb.data.repo.impl.TrendingRepository
 import javax.inject.Singleton
@@ -32,5 +32,11 @@ class RepositoriesModule {
     @Singleton
     fun provideSearchRepository(apiService: IMovieDbApiService): ISearchRepository {
         return SearchRepository(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun providePeopleRepository(apiService: IMovieDbApiService): IPeopleRepository {
+        return PeopleRepository(apiService)
     }
 }

@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ru.vitalysizov.moviedb.databinding.ItemCastBinding
 import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastItem
+import ru.vitalysizov.moviedb.presentation.base.ItemClickListener
 import ru.vitalysizov.moviedb.presentation.base.adapter.viewHolder.BaseViewHolder
 
-class CastAndCrewAdapter : ListAdapter<CastItem, BaseViewHolder>(Companion) {
+class CastAndCrewAdapter(
+    private val listener: ItemClickListener<CastItem>
+) : ListAdapter<CastItem, BaseViewHolder>(Companion) {
 
     companion object : DiffUtil.ItemCallback<CastItem>() {
         override fun areItemsTheSame(oldItem: CastItem, newItem: CastItem): Boolean {
@@ -29,6 +32,8 @@ class CastAndCrewAdapter : ListAdapter<CastItem, BaseViewHolder>(Companion) {
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val currentItem = getItem(position)
         val biding = holder.binding as ItemCastBinding
+        biding.root.setOnClickListener { listener.onClickListener(currentItem) }
+
         biding.castItem = currentItem
         biding.executePendingBindings()
     }

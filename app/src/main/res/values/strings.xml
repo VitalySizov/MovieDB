@@ -43,4 +43,14 @@
     <string name="to_results">К результатам</string>
     <string name="noting_found">Ничего не нашлось</string>
 
+    <!-- Детализация персоны -->
+    <string name="birthday_without_deathDay_mask">Дата рождения:\n%s (%s)</string>
+    <string name="birthday_with_deathDay_mask">Дата рождения:\n%s \nДата смерти:\n%s (%s)</string>
+
+    <!-- Внешние ссылки -->
+    <string name="facebook_url_with_id">https://www.facebook.com/%s</string>
+    <string name="instagram_url_with_id">https://www.instagram.com/%s</string>
+    <string name="twitter_url_with_id">https://twitter.com/%s</string>
+
+
 </resources>

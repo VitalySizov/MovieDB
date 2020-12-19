@@ -6,17 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ru.vitalysizov.moviedb.databinding.ItemBackdropMovieDetailsBinding
-import ru.vitalysizov.moviedb.model.domain.movies.MovieImageItem
+import ru.vitalysizov.moviedb.model.domain.images.ImageItem
 import ru.vitalysizov.moviedb.presentation.base.adapter.viewHolder.BaseViewHolder
 
-class BackDropAdapter : ListAdapter<MovieImageItem, BaseViewHolder>(Companion) {
+class BackDropAdapter : ListAdapter<ImageItem, BaseViewHolder>(Companion) {
 
-    companion object : DiffUtil.ItemCallback<MovieImageItem>() {
-        override fun areItemsTheSame(oldItem: MovieImageItem, newItem: MovieImageItem): Boolean {
+    companion object : DiffUtil.ItemCallback<ImageItem>() {
+        override fun areItemsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: MovieImageItem, newItem: MovieImageItem): Boolean {
+        override fun areContentsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
             return oldItem.filePath == newItem.filePath
         }
     }

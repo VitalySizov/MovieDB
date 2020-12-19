@@ -9,35 +9,17 @@
             type="ru.vitalysizov.moviedb.model.domain.movies.MovieItem" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="145dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_small"
-        android:layout_marginEnd="@dimen/padding_default"
-        android:layout_marginBottom="@dimen/padding_small"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_movie_poster"
-            android:layout_width="145dp"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            app:loadImage="@{movie.posterPath}"
-            tools:src="@tools:sample/backgrounds/scenic" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_movie_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:minLines="2"
-            android:text="@{movie.title}"
-            tools:text="@tools:sample/lorem/random" />
+        <include
+            layout="@layout/include_item_movie"
+            app:posterPath="@{movie.posterPath}"
+            app:title="@{movie.title}" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
+
 
 </layout>

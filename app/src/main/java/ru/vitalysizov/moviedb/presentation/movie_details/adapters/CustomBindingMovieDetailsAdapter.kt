@@ -14,8 +14,9 @@ import ru.vitalysizov.moviedb.model.domain.GenreItem
 import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastItem
 import ru.vitalysizov.moviedb.model.domain.castAndCrew.CrewItem
 import ru.vitalysizov.moviedb.model.domain.movies.MovieDetailsItem
-import ru.vitalysizov.moviedb.model.domain.movies.MovieImageItem
+import ru.vitalysizov.moviedb.model.domain.images.ImageItem
 import ru.vitalysizov.moviedb.model.domain.production.ProductionCountriesItem
+import ru.vitalysizov.moviedb.presentation.base.ItemClickListener
 import ru.vitalysizov.moviedb.presentation.movie_details.adapters.backDrop.BackDropAdapter
 import ru.vitalysizov.moviedb.presentation.movie_details.adapters.castAndCrew.CastAndCrewAdapter
 import ru.vitalysizov.moviedb.presentation.movie_details.adapters.posterAndDescription.MovieGenresAdapter
@@ -26,7 +27,7 @@ const val DEPARTMENT_WRITING = "Writing"
 const val JOB_DIRECTOR = "Director"
 
 @BindingAdapter(value = ["setBackDrop"])
-fun RecyclerView.setRowBackDropImages(items: List<MovieImageItem>) {
+fun RecyclerView.setRowBackDropImages(items: List<ImageItem>) {
     val backDropAdapter = BackDropAdapter()
     backDropAdapter.submitList(items)
     adapter = backDropAdapter
@@ -81,9 +82,10 @@ fun RecyclerView.setRowMovieGenres(items: List<GenreItem>) {
     adapter = movieGenreAdapter
 }
 
-@BindingAdapter(value = ["setCast"])
-fun RecyclerView.setRowCast(items: List<CastItem>) {
-    val castAdapter = CastAndCrewAdapter()
+@BindingAdapter(value = ["setCast", "setCastListener"])
+fun RecyclerView.setRowCast(items: List<CastItem>, listener: ItemClickListener<CastItem>) {
+    val castAdapter = CastAndCrewAdapter(listener)
+
     castAdapter.submitList(items)
     adapter = castAdapter
 }

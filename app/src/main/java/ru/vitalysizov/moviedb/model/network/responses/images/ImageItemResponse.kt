@@ -1,8 +1,8 @@
-package ru.vitalysizov.moviedb.model.network.responses.movies
+package ru.vitalysizov.moviedb.model.network.responses.images
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieImageItemResponse(
+data class ImageItemResponse(
 
     @SerializedName("aspect_ratio")
     val aspectRatio: Double?,

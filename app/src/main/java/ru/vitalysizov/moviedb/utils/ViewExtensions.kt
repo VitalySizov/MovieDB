@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import coil.api.load
+import coil.transform.BlurTransformation
 import ru.vitalysizov.moviedb.BuildConfig
 import ru.vitalysizov.moviedb.R
 

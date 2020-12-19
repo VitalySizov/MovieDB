@@ -15,21 +15,39 @@
             app:destination="@id/searchResultFragment" />
         <action
             android:id="@+id/action_searchTabFragment_to_movieDetailsFragment2"
-            app:destination="@id/movieDetailsFragment2" />
+            app:destination="@id/searchMovieDetailsFragment" />
+        <action
+            android:id="@+id/action_to_peopleDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragment"
-        android:label="SearchResultFragment">
+        android:label="SearchResultFragment"
+        tools:layout="@layout/fragment_search_result">
         <argument
             android:name="query"
             app:argType="string" />
         <action
             android:id="@+id/action_searchResultFragment_to_movieDetailsFragment2"
-            app:destination="@id/movieDetailsFragment2" />
+            app:destination="@id/searchMovieDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/movieDetailsFragment2"
+        android:id="@+id/searchMovieDetailsFragment"
         android:name="ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragment"
-        android:label="MovieDetailsFragment" />
+        android:label="MovieDetailsFragment"
+        tools:layout="@layout/fragment_movie_details">
+        <action
+            android:id="@+id/action_to_peopleDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragment"
+        android:label="PersonDetailsFragment"
+        tools:layout="@layout/fragment_person_details">
+        <argument
+            android:name="peopleId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

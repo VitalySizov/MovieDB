@@ -12,15 +12,26 @@
         android:label="HomeTabFragment" >
         <action
             android:id="@+id/action_homeTabFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/homeMovieDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/movieDetailsFragment"
+        android:id="@+id/homeMovieDetailsFragment"
         tools:layout="@layout/fragment_movie_details"
         android:name="ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragment"
         android:label="MovieDetailsFragment" >
         <argument
             android:name="movieId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_to_peopleDetailsFragment"
+            app:destination="@id/peopleDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleDetailsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragment"
+        android:label="PeopleDetailsFragment" >
+        <argument
+            android:name="peopleId"
             app:argType="integer" />
     </fragment>
 </navigation>

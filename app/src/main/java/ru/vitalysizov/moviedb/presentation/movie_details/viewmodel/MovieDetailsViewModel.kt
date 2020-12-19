@@ -12,6 +12,7 @@ import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastAndCrewItem
 import ru.vitalysizov.moviedb.model.domain.movies.MovieDetailsItem
 import ru.vitalysizov.moviedb.model.domain.movies.MovieImages
 import ru.vitalysizov.moviedb.presentation.base.viewmodel.BaseViewModel
+import ru.vitalysizov.moviedb.utils.Event
 import ru.vitalysizov.moviedb.utils.ioToUi
 import javax.inject.Inject
 import javax.inject.Named
@@ -38,6 +39,10 @@ class MovieDetailsViewModel @Inject constructor(
     private val _castAndCrew = MutableLiveData<List<CastAndCrewItem>>()
     val castAndCrew: LiveData<List<CastAndCrewItem>>
         get() = _castAndCrew
+
+    private val _castPeopleDetailsClick = MutableLiveData<Event<Int>>()
+    val castPeopleDetailsClick: LiveData<Event<Int>>
+        get() = _castPeopleDetailsClick
 
     init {
         loadMovieDetails(movieId)
@@ -73,6 +78,10 @@ class MovieDetailsViewModel @Inject constructor(
         _backDropImages.value = listOf(movieDetailsContent.movieImages)
         _movieDetails.value = listOf(movieDetailsContent.movieDetails)
         _castAndCrew.value = listOf(modifyCastAndCrew)
+    }
+
+    fun setCastPeopleDetailsClick(personId: Int) {
+        _castPeopleDetailsClick.value = Event(personId)
     }
 }
 

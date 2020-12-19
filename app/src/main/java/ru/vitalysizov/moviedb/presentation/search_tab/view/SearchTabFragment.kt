@@ -18,6 +18,7 @@ import ru.vitalysizov.moviedb.model.domain.persons.PersonItem
 import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowItem
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragmentArgs
+import ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragmentArgs
 import ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragmentArgs
 import ru.vitalysizov.moviedb.presentation.search_tab.adapters.SearchTabAdapter
 import ru.vitalysizov.moviedb.presentation.search_tab.viewmodel.SearchTabViewModel
@@ -81,7 +82,7 @@ class SearchTabFragment : BaseFragment() {
     }
 
     private fun onClickPerson(item: PersonItem) {
-
+        searchTabViewModel.setPersonDetailsClick(item.id)
     }
 
     private fun initSearchTabObservers(binding: FragmentSearchTabBinding) {
@@ -120,5 +121,16 @@ class SearchTabFragment : BaseFragment() {
                 }
             })
         }
+
+        searchTabViewModel.personDetailsClick.observe(viewLifecycleOwner) { item ->
+            item.getContentIfNotHandled()?.let {
+                val args = PersonDetailsFragmentArgs(it)
+                findNavController().navigate(
+                    R.id.action_to_peopleDetailsFragment,
+                    args.toBundle()
+                )
+            }
+        }
+
     }
 }

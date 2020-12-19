@@ -1,22 +1,22 @@
 package ru.vitalysizov.moviedb.domain.mapper.movies
 
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
-import ru.vitalysizov.moviedb.model.domain.movies.MovieImageItem
-import ru.vitalysizov.moviedb.model.network.responses.movies.MovieImageItemResponse
+import ru.vitalysizov.moviedb.model.domain.images.ImageItem
+import ru.vitalysizov.moviedb.model.network.responses.images.ImageItemResponse
 import javax.inject.Inject
 
-class MovieImagesMapper @Inject constructor() :
-    Mapper<List<MovieImageItemResponse>?, List<MovieImageItem>> {
+class ImagesMapper @Inject constructor() :
+    Mapper<List<ImageItemResponse>?, List<ImageItem>> {
 
-    override fun map(from: List<MovieImageItemResponse>?): List<MovieImageItem> {
+    override fun map(from: List<ImageItemResponse>?): List<ImageItem> {
         if (from.isNullOrEmpty()) {
             return emptyList()
         }
 
-        val list = arrayListOf<MovieImageItem>()
+        val list = arrayListOf<ImageItem>()
         from.forEach {
             list.add(
-                MovieImageItem(
+                ImageItem(
                     aspectRatio = it.aspectRatio ?: 0.0,
                     filePath = it.filePath.orEmpty(),
                     height = it.height ?: 0,

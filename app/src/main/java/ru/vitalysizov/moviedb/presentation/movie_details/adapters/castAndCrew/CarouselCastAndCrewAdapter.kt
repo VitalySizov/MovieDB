@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ru.vitalysizov.moviedb.databinding.ItemCarouselCastBinding
-
 import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastAndCrewItem
+import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastItem
+import ru.vitalysizov.moviedb.presentation.base.ItemClickListener
 import ru.vitalysizov.moviedb.presentation.base.adapter.viewHolder.BaseViewHolder
 
-class CarouselCastAndCrewAdapter : ListAdapter<CastAndCrewItem, BaseViewHolder>(Companion) {
+class CarouselCastAndCrewAdapter(
+    private val listener: ItemClickListener<CastItem>
+) : ListAdapter<CastAndCrewItem, BaseViewHolder>(Companion) {
 
     companion object : DiffUtil.ItemCallback<CastAndCrewItem>() {
         override fun areItemsTheSame(oldItem: CastAndCrewItem, newItem: CastAndCrewItem): Boolean {
@@ -34,7 +37,7 @@ class CarouselCastAndCrewAdapter : ListAdapter<CastAndCrewItem, BaseViewHolder>(
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val currentItem = getItem(position)
         val binding = holder.binding as ItemCarouselCastBinding
-
+        binding.listener = listener
         binding.castAndCrew = currentItem
     }
 
