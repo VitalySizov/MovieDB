@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import kotlinx.android.synthetic.main.item_carousel_genres.view.*
 import ru.vitalysizov.moviedb.databinding.ItemCarouselGenresBinding
 import ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.GenresCategory
 import ru.vitalysizov.moviedb.presentation.home_tab.adapters.viewholders.CarouselGenresViewHolder
@@ -27,7 +26,7 @@ class CarouselGenresAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselGenresViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCarouselGenresBinding.inflate(inflater, parent, false)
-        val vh = CarouselGenresViewHolder(binding, binding.root.rvCarouselGenres, scrollStateHolder)
+        val vh = CarouselGenresViewHolder(binding, binding.rvCarouselGenres, scrollStateHolder)
 
         vh.onCreated()
         return vh

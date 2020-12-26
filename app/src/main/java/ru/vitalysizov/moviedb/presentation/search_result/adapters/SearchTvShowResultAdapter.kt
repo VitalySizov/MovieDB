@@ -1,7 +1,6 @@
 package ru.vitalysizov.moviedb.presentation.search_result.adapters
 
 import androidx.lifecycle.LifecycleOwner
-import kotlinx.android.synthetic.main.item_search_tv_show.view.*
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowItem
 import ru.vitalysizov.moviedb.presentation.search_result.view.SearchResultViewModel
@@ -18,7 +17,7 @@ class SearchTvShowResultAdapter(
             is BaseSearchResultViewHolder.SearchTvShowViewViewHolder -> viewHolder.binding.executeAfter {
                 val currentItem = getItem(position) as TvShowItem
                 tvShowItem = currentItem
-                root.linearLayoutSearchShow.setOnClickListener {
+                viewHolder.binding.linearLayoutSearchShow.setOnClickListener {
                     itemClickListener.invoke(
                         currentItem
                     )

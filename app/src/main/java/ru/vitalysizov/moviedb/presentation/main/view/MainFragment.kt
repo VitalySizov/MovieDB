@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
-import kotlinx.android.synthetic.main.fragment_main.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.databinding.FragmentMainBinding
@@ -30,14 +29,14 @@ class MainFragment : BaseFragment() {
         factoryProducer = { viewModelFactory }
     )
 
+    lateinit var binding: FragmentMainBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding: FragmentMainBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         return binding.root
     }
 
@@ -49,7 +48,7 @@ class MainFragment : BaseFragment() {
     private fun initBottomNavigation() {
         val navigationAdapter = AHBottomNavigationAdapter(activity, R.menu.bottom_navigation_menu)
 
-        val mainBottomNavigation = main_bottom_navigation
+        val mainBottomNavigation = binding.mainBottomNavigation
         mainBottomNavigation.accentColor =
             ContextCompat.getColor(requireContext(), R.color.colorPrimary)
 
@@ -65,7 +64,7 @@ class MainFragment : BaseFragment() {
             R.id.search_tab,
             R.id.account_tab
         )
-        main_bottom_navigation.setupWithNavController(
+        mainBottomNavigation.setupWithNavController(
             navGraphIds,
             bottomItemIds,
             childFragmentManager,

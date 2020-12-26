@@ -2,7 +2,6 @@ package ru.vitalysizov.moviedb.presentation.search_result.adapters
 
 
 import androidx.lifecycle.LifecycleOwner
-import kotlinx.android.synthetic.main.item_search_movie.view.*
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
 import ru.vitalysizov.moviedb.presentation.search_result.view.SearchResultViewModel

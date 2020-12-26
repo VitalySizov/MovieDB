@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import kotlinx.android.synthetic.main.item_carousel_movies.view.*
 import ru.vitalysizov.moviedb.databinding.ItemCarouselMoviesBinding
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
 import ru.vitalysizov.moviedb.presentation.base.ItemClickListener
@@ -31,7 +30,7 @@ class CarouselMoviesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselMoviesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCarouselMoviesBinding.inflate(inflater, parent, false)
-        val vh = CarouselMoviesViewHolder(binding, binding.root.rvCarouselMovies, scrollStateHolder)
+        val vh = CarouselMoviesViewHolder(binding, binding.rvCarouselMovies, scrollStateHolder)
 
         vh.onCreated()
         return vh
