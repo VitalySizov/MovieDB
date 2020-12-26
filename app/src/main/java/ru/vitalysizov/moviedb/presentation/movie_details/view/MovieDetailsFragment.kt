@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import ru.vitalysizov.moviedb.R
@@ -39,7 +38,7 @@ class MovieDetailsFragment : BaseFragment(), ItemClickListener<CastItem> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentMovieDetailsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
 

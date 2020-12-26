@@ -10,13 +10,13 @@ class PeopleDetailsMapper @Inject constructor() : Mapper<PeopleDetailsResponse, 
     override fun map(from: PeopleDetailsResponse): PersonDetails {
         return PersonDetails(
             biography = from.biography.orEmpty(),
-            birthDay = if (from.birthday != null) {
+            birthDay = if (!from.birthday.isNullOrEmpty()) {
                 LocalDate.parse(from.birthday)
             } else {
                 LocalDate.of(0, 1, 1)
             },
             knowForDepartment = from.knowForDepartment.orEmpty(),
-            deathDay = if (from.deathDay != null) {
+            deathDay = if (!from.deathDay.isNullOrEmpty()) {
                 LocalDate.parse(from.deathDay)
             } else {
                 LocalDate.of(0, 1, 1)

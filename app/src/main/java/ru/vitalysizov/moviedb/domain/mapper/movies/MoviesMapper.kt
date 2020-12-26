@@ -19,7 +19,7 @@ class MoviesMapper @Inject constructor() : Mapper<MovieItemResponse, MovieItem> 
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
             genreIds = from.genreIds ?: listOf(),
-            releaseDate = if (from.releaseDate != null) {
+            releaseDate = if (!from.releaseDate.isNullOrEmpty()) {
                 LocalDate.parse(from.releaseDate)
             } else {
                 LocalDate.of(0, 1, 1)

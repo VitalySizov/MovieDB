@@ -8,21 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.databinding.FragmentPersonDetailsBinding
 import ru.vitalysizov.moviedb.model.domain.person.PersonCastMovieItem
 import ru.vitalysizov.moviedb.model.domain.person.PersonCastTvItem
-import ru.vitalysizov.moviedb.presentation.base.ItemClickListener
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragmentArgs
 import ru.vitalysizov.moviedb.presentation.person_details.adapters.cast.PersonCastAndCrewAdapter
 import ru.vitalysizov.moviedb.presentation.person_details.viewmodel.PersonDetailsViewModel
-import ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragmentArgs
-import ru.vitalysizov.moviedb.utils.dismissKeyboard
 import javax.inject.Inject
 
 class PersonDetailsFragment : BaseFragment() {
@@ -36,7 +31,7 @@ class PersonDetailsFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentPersonDetailsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_person_details, container, false)
 
@@ -61,7 +56,7 @@ class PersonDetailsFragment : BaseFragment() {
             }
         }
 
-        personDetailsViewModel.tvShowDetailsClick.observe(viewLifecycleOwner, Observer { item ->
+        personDetailsViewModel.tvShowDetailsClick.observe(viewLifecycleOwner, { item ->
             item.getContentIfNotHandled()?.let {
                 //TODO: navigate to tvShow details
             }

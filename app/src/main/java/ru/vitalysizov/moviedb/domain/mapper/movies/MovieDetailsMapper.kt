@@ -33,7 +33,7 @@ class MovieDetailsMapper @Inject constructor(
             backDropPath = from.backDropPath.orEmpty(),
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
-            releaseDate = if (from.releaseDate != null) {
+            releaseDate = if (!from.releaseDate.isNullOrEmpty()) {
                 LocalDate.parse(from.releaseDate)
             } else {
                 LocalDate.of(0, 1, 1)

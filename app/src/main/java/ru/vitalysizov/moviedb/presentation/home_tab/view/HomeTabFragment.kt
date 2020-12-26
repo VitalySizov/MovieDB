@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import ru.vitalysizov.moviedb.R
@@ -56,7 +54,7 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentHomeTabBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_tab, container, false)
 
@@ -81,7 +79,7 @@ class HomeTabFragment : BaseFragment(), ItemClickListener<MovieItem> {
     }
 
     private fun initMovieClickObserver() {
-        homeTabViewModel.movieDetailsClick.observe(viewLifecycleOwner, Observer { item ->
+        homeTabViewModel.movieDetailsClick.observe(viewLifecycleOwner, { item ->
             item.getContentIfNotHandled()?.let {
                 val args = MovieDetailsFragmentArgs(it)
                 findNavController().navigate(

@@ -15,7 +15,7 @@ class TvShowsMapper @Inject constructor() : Mapper<TvShowItemResponse, TvShowIte
             backdropPath = from.backdropPath.orEmpty(),
             voteAverage = from.voteAverage.toString(),
             overview = from.overview.orEmpty(),
-            firstAirDate = if (from.firstAirDate != null) {
+            firstAirDate = if (!from.firstAirDate.isNullOrEmpty()) {
                 LocalDate.parse(from.firstAirDate)
             } else {
                 LocalDate.of(0, 1, 1)
