@@ -27,7 +27,6 @@
             android:layout_width="48dp"
             android:layout_height="72dp"
             android:layout_weight="0"
-            android:scaleType="center"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
