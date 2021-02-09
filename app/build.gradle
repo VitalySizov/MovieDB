@@ -15,9 +15,15 @@ android {
         versionName "1.0"
 
         buildConfigField 'String', 'BASE_API_URL', '"https://api.themoviedb.org/3/"'
+        buildConfigField 'String', 'BASE_HOST_URL', '"www.themoviedb.org"'
         buildConfigField 'String', 'API_KEY', '"13847aa040037f1de9e84ea1f853d0fb"'
-
+        buildConfigField 'String', 'TMDB_AUTH_URL', '"https://www.themoviedb.org/authenticate/"'
+        buildConfigField 'String', 'AUTH_REDIRECT', '"?redirect_to=auth://auth_callback"'
         buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/w500"'
+        buildConfigField 'String', 'HOST_AUTH_CALLBACK', '"auth_callback"'
+        buildConfigField 'String', 'AUTH_SCHEME', '"auth"'
+
+        manifestPlaceholders = [host: "auth_callback", scheme: "auth"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,6 +59,7 @@ dependencies {
     implementation "androidx.core:core-ktx:${versions.androidxCore}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.androidxConstraint}"
     implementation "androidx.recyclerview:recyclerview:${versions.androidxRecycler}"
+    implementation "androidx.browser:browser:${versions.androidxBrowser}"
 
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"

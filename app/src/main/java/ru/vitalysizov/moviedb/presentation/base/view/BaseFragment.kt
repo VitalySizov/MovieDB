@@ -2,7 +2,7 @@ package ru.vitalysizov.moviedb.presentation.base.view
 
 import android.content.Context
 import dagger.android.support.DaggerFragment
-import ru.vitalysizov.moviedb.presentation.AppActivity
+import ru.vitalysizov.moviedb.presentation.activity.AppActivity
 
 abstract class BaseFragment : DaggerFragment() {
 

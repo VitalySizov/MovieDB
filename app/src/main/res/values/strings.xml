@@ -6,7 +6,7 @@
     <string name="search_tab">Search</string>
     <string name="account_tab">Account</string>
 
-    <!-- Домашний экран -->
+    <!-- Home screen -->
     <string name="now_in_theaters_header">В кинотеатрах</string>
     <string name="genres_title">Жанры</string>
     <string name="populars_header">Популярное</string>
@@ -15,7 +15,7 @@
     <string name="day">День</string>
     <string name="week">Неделя</string>
 
-    <!-- Детализация фильма -->
+    <!-- Movie details -->
     <string name="cast_header">В главных ролях</string>
     <string name="cast_all">Все роли</string>
     <string name="title_mask">%s / %s</string>
@@ -30,7 +30,7 @@
     <string name="header_writers">Сценаристы</string>
     <string name="all_cast_and_crew">Все актёры и съемочная группа</string>
 
-    <!-- Поиск -->
+    <!-- Search -->
     <string name="search_hint">Фильмы, сериалы, персоны</string>
     <string name="header_found_films">Найденные фильмы</string>
     <string name="header_found_tv_shows">Найденные сериалы</string>
@@ -43,14 +43,17 @@
     <string name="to_results">К результатам</string>
     <string name="noting_found">Ничего не нашлось</string>
 
-    <!-- Детализация персоны -->
+    <!-- Person details -->
     <string name="birthday_without_deathDay_mask">Дата рождения:\n%s (%s)</string>
     <string name="birthday_with_deathDay_mask">Дата рождения:\n%s \nДата смерти:\n%s (%s)</string>
 
-    <!-- Внешние ссылки -->
+    <!-- External links -->
     <string name="facebook_url_with_id">https://www.facebook.com/%s</string>
     <string name="instagram_url_with_id">https://www.instagram.com/%s</string>
     <string name="twitter_url_with_id">https://twitter.com/%s</string>
+
+    <!-- Account -->
+    <string name="login">Войти</string>
 
 
 </resources>

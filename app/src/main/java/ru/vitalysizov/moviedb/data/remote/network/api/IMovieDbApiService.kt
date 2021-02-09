@@ -2,9 +2,11 @@ package ru.vitalysizov.moviedb.data.remote.network.api
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
+import ru.vitalysizov.moviedb.domain.params.authentication.CreateSessionParams
+import ru.vitalysizov.moviedb.model.network.responses.account.AccountDetailsResponse
+import ru.vitalysizov.moviedb.model.network.responses.authentication.RequestTokenResponse
+import ru.vitalysizov.moviedb.model.network.responses.authentication.SessionResponse
 import ru.vitalysizov.moviedb.model.network.responses.base.BaseResponse
 import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastAndCrewResponse
 import ru.vitalysizov.moviedb.model.network.responses.collections.CollectionItemResponse
@@ -143,4 +145,13 @@ interface IMovieDbApiService {
      */
     @GET("person/{person_id}/images")
     fun getImagesForPerson(@Path("person_id") personId: Int): Single<PeopleImagesResponse>
+
+    @GET("authentication/token/new")
+    fun createRequestToken(): Single<RequestTokenResponse>
+
+    @POST("authentication/session/new")
+    fun createSession(@Body createSessionParams: CreateSessionParams): Single<SessionResponse>
+
+    @GET("account")
+    fun getAccountDetails(@Query("session_id") sessionId: String): Single<AccountDetailsResponse>
 }

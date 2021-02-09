@@ -37,6 +37,8 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = mainViewModel
         return binding.root
     }
 

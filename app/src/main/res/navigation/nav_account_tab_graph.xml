@@ -9,5 +9,18 @@
         android:id="@+id/accountTabFragment"
         android:name="ru.vitalysizov.moviedb.presentation.account_tab.view.AccountTabFragment"
         android:label="AccountTabFragment"
-        tools:layout="@layout/fragment_account_tab" />
+        tools:layout="@layout/fragment_account_tab">
+        <action
+            android:id="@+id/action_accountTabFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.authentication.view.AuthenticationFragment"
+        android:label="AuthenticationFragment">
+        <argument
+            android:name="authUrl"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>
