@@ -4,6 +4,8 @@ import io.reactivex.Single
 import ru.vitalysizov.moviedb.data.remote.network.api.IMovieDbApiService
 import ru.vitalysizov.moviedb.data.repo.IAuthenticationRepository
 import ru.vitalysizov.moviedb.domain.params.authentication.CreateSessionParams
+import ru.vitalysizov.moviedb.domain.params.authentication.DeleteSessionParams
+import ru.vitalysizov.moviedb.model.network.responses.authentication.LogoutResponse
 import ru.vitalysizov.moviedb.model.network.responses.authentication.RequestTokenResponse
 import ru.vitalysizov.moviedb.model.network.responses.authentication.SessionResponse
 
@@ -19,4 +21,7 @@ class AuthenticationRepository(
         return apiService.createSession(createSessionParams)
     }
 
+    override fun logoutAccount(deleteSessionParams: DeleteSessionParams): Single<LogoutResponse> {
+        return apiService.logoutAccount(deleteSessionParams)
+    }
 }

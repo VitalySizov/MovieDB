@@ -58,6 +58,10 @@ class AccountTabFragment : DaggerFragment() {
             accountTabViewModel.onLoginClicked()
         }
 
+        binding.btnLogout.setOnClickListener {
+            accountTabViewModel.onLogoutClicked()
+        }
+
         systemViewModel.authRequestToken.observe(viewLifecycleOwner, { authRequestToken ->
             accountTabViewModel.onCreateSessionAndGetUser(authRequestToken)
         })
@@ -95,7 +99,7 @@ class AccountTabFragment : DaggerFragment() {
                 val customTabsIntent = customTabsBuilder.build()
                 val availablePackageName = customTabHelper.getPackageNameToUse(requireContext(), it)
 
-                if (availablePackageName != null) {
+                if (availablePackageName == null) {
                     val args = AuthenticationFragmentArgs(it)
                     findNavController().navigate(
                         R.id.action_accountTabFragment_to_authenticationFragment,

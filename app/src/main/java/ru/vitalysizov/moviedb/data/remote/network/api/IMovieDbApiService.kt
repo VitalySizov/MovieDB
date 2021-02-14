@@ -4,7 +4,9 @@ import com.google.gson.JsonObject
 import io.reactivex.Single
 import retrofit2.http.*
 import ru.vitalysizov.moviedb.domain.params.authentication.CreateSessionParams
+import ru.vitalysizov.moviedb.domain.params.authentication.DeleteSessionParams
 import ru.vitalysizov.moviedb.model.network.responses.account.AccountDetailsResponse
+import ru.vitalysizov.moviedb.model.network.responses.authentication.LogoutResponse
 import ru.vitalysizov.moviedb.model.network.responses.authentication.RequestTokenResponse
 import ru.vitalysizov.moviedb.model.network.responses.authentication.SessionResponse
 import ru.vitalysizov.moviedb.model.network.responses.base.BaseResponse
@@ -154,4 +156,7 @@ interface IMovieDbApiService {
 
     @GET("account")
     fun getAccountDetails(@Query("session_id") sessionId: String): Single<AccountDetailsResponse>
+
+    @HTTP(method = "DELETE", path = "authentication/session", hasBody = true)
+    fun logoutAccount(@Body deleteSessionParams: DeleteSessionParams): Single<LogoutResponse>
 }

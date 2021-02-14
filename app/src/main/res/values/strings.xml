@@ -54,6 +54,7 @@
 
     <!-- Account -->
     <string name="login">Войти</string>
+    <string name="logout">Выйти</string>
 
 
 </resources>

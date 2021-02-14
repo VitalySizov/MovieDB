@@ -29,4 +29,10 @@ class MovieDbPreferences(
         }
         set(value) = prefs.edit().putString(ACCOUNT, gson.toJson(value)).apply()
 
+
+    fun clearSessionAndAccountData() {
+        sessionId = null
+        account = null
+    }
+
 }
