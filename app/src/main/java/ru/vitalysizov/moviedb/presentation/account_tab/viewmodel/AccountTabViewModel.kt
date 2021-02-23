@@ -3,7 +3,7 @@ package ru.vitalysizov.moviedb.presentation.account_tab.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.vitalysizov.moviedb.BuildConfig
-import ru.vitalysizov.moviedb.data.local.prefs.MovieDbPreferences
+import ru.vitalysizov.moviedb.data.local.prefs.AccountPreferences
 import ru.vitalysizov.moviedb.domain.params.authentication.CreateSessionParams
 import ru.vitalysizov.moviedb.domain.params.authentication.DeleteSessionParams
 import ru.vitalysizov.moviedb.domain.useCase.account.GetAccountDetailsUseCase
@@ -21,7 +21,7 @@ class AccountTabViewModel @Inject constructor(
     private val createSessionUseCase: CreateSessionUseCase,
     private val getAccountDetailsUseCase: GetAccountDetailsUseCase,
     private val logoutAccountUseCase: LogoutAccountUseCase,
-    private val movieDbPreferences: MovieDbPreferences
+    private val accountPreferences: AccountPreferences
 ) : BaseViewModel() {
 
     private val authUrlMutable = MutableLiveData<Event<String>>()
@@ -60,12 +60,12 @@ class AccountTabViewModel @Inject constructor(
         }
     }
 
-    fun onCreateSessionAndGetUser(requestToken: String) {
+    fun onCreateSessionAndGetAccount(requestToken: String) {
         launch {
             createSessionUseCase.invoke(CreateSessionParams(requestToken))
                 .flatMap { response ->
                     if (response.success) {
-                        movieDbPreferences.sessionId = response.sessionId
+                        accountPreferences.sessionId = response.sessionId
                         getAccountDetailsUseCase.invoke(response.sessionId)
                     } else {
                         //TODO handle error
@@ -73,8 +73,11 @@ class AccountTabViewModel @Inject constructor(
                     }
                 }
                 .ioToUi()
+                .doOnSubscribe { showLoading() }
+                .doAfterTerminate { hideLoading() }
                 .subscribe({ accountDetails ->
                     accountDetailsMutable.value = accountDetails
+                    accountPreferences.account = accountDetails
                     showAuthButtonMutable.value = false
                     showLogoutButtonMutable.value = true
                 }, { error ->
@@ -84,7 +87,7 @@ class AccountTabViewModel @Inject constructor(
     }
 
     private fun getAccountDetails() {
-        val sessionId = movieDbPreferences.sessionId
+        val sessionId = accountPreferences.sessionId
 
         if (sessionId.isNullOrEmpty()) {
             showAuthButtonMutable.value = true
@@ -97,7 +100,7 @@ class AccountTabViewModel @Inject constructor(
                 .doOnSubscribe { showLoading() }
                 .doAfterTerminate { hideLoading() }
                 .subscribe({ accountDetails ->
-                    movieDbPreferences.account = accountDetails
+                    accountPreferences.account = accountDetails
                     accountDetailsMutable.value = accountDetails
                     showLogoutButtonMutable.value = true
                 }, { error ->
@@ -107,7 +110,7 @@ class AccountTabViewModel @Inject constructor(
     }
 
     fun onLogoutClicked() {
-        val sessionId = movieDbPreferences.sessionId
+        val sessionId = accountPreferences.sessionId
 
         if (sessionId.isNullOrEmpty()) {
             return
@@ -120,8 +123,8 @@ class AccountTabViewModel @Inject constructor(
                 .doAfterTerminate { hideLoading() }
                 .subscribe({
                     if (it.success) {
-                        movieDbPreferences.clearSessionAndAccountData()
-                        accountDetailsMutable.value = movieDbPreferences.account
+                        accountPreferences.clearAccountPreferences()
+                        accountDetailsMutable.value = accountPreferences.account
                         showLogoutButtonMutable.value = false
                         showAuthButtonMutable.value = true
                     }

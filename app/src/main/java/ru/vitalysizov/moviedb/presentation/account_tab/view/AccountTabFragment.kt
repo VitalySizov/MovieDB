@@ -63,7 +63,9 @@ class AccountTabFragment : DaggerFragment() {
         }
 
         systemViewModel.authRequestToken.observe(viewLifecycleOwner, { authRequestToken ->
-            accountTabViewModel.onCreateSessionAndGetUser(authRequestToken)
+            authRequestToken.getContentIfNotHandled()?.let { requestToken ->
+                accountTabViewModel.onCreateSessionAndGetAccount(requestToken)
+            }
         })
 
         accountTabViewModel.authUrl.observe(viewLifecycleOwner, { authUrl ->

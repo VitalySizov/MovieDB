@@ -3,10 +3,9 @@ package ru.vitalysizov.moviedb.di.modules
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import ru.vitalysizov.moviedb.data.local.prefs.MovieDbPreferences
+import ru.vitalysizov.moviedb.data.local.prefs.AccountPreferences
 import javax.inject.Singleton
 
 @Module
@@ -20,7 +19,7 @@ class StorageModule {
 
     @Provides
     @Singleton
-    fun provideMovieDbPreferences(sharedPreferences: SharedPreferences, gson: Gson): MovieDbPreferences {
-        return MovieDbPreferences(sharedPreferences, gson)
+    fun provideAccountPreferences(sharedPreferences: SharedPreferences): AccountPreferences {
+        return AccountPreferences(sharedPreferences)
     }
 }

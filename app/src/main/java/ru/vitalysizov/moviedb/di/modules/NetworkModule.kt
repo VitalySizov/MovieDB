@@ -20,10 +20,6 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    companion object {
-        const val BASE_URL = BuildConfig.BASE_API_URL
-    }
-
     @Provides
     @Singleton
     fun provideOkHttpClient(
@@ -75,7 +71,7 @@ class NetworkModule {
             .addCallAdapterFactory(callAdapter)
             .addConverterFactory(converterFactory)
             .client(okHttpClient)
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_API_URL)
             .build()
     }
 
