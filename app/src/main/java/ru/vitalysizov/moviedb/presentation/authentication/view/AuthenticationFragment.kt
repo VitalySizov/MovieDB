@@ -74,7 +74,7 @@ class AuthenticationFragment : BaseFragment() {
                             //TODO error
                         }
                     }
-                    uri?.host != BuildConfig.BASE_HOST_URL -> {
+                    uri?.host != BuildConfig.BASE_WEB_URL -> {
                         return false
                     }
                 }

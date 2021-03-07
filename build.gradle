@@ -21,7 +21,8 @@ buildscript {
             koil                   : '1.1.0',
             lifecycle              : '2.2.0',
             threeTenABP            : '1.2.4',
-            keyboardVisibilityEvent: '2.3.0'
+            keyboardVisibilityEvent: '2.3.0',
+            jsoup                  : '1.13.1'
     ]
 
     repositories {

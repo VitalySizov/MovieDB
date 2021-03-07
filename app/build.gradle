@@ -14,12 +14,13 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField 'String', 'BASE_API_URL', '"https://api.themoviedb.org/3/"'
-        buildConfigField 'String', 'BASE_HOST_URL', '"www.themoviedb.org"'
         buildConfigField 'String', 'API_KEY', '"13847aa040037f1de9e84ea1f853d0fb"'
+        buildConfigField 'String', 'BASE_API_URL', '"https://api.themoviedb.org/3/"'
+        buildConfigField 'String', 'BASE_WEB_URL', '"https://themoviedb.org"'
+        buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/w500"'
+
         buildConfigField 'String', 'TMDB_AUTH_URL', '"https://www.themoviedb.org/authenticate/"'
         buildConfigField 'String', 'AUTH_REDIRECT', '"?redirect_to=auth://auth_callback"'
-        buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/w500"'
         buildConfigField 'String', 'HOST_AUTH_CALLBACK', '"auth_callback"'
         buildConfigField 'String', 'AUTH_SCHEME', '"auth"'
 
@@ -94,6 +95,9 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.httpLogging}"
+
+    // Jsoup - (Html Parsing)
+    implementation "org.jsoup:jsoup:${versions.jsoup}"
 
     // Koil (image loading library)
     implementation "io.coil-kt:coil:${versions.koil}"

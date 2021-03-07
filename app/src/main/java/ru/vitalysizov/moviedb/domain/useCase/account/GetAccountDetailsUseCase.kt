@@ -3,6 +3,7 @@ package ru.vitalysizov.moviedb.domain.useCase.account
 import io.reactivex.Single
 import ru.vitalysizov.moviedb.data.repo.IAccountRepository
 import ru.vitalysizov.moviedb.data.repo.impl.AccountRepository
+import ru.vitalysizov.moviedb.data.repo.web.MovieDbWebRepository
 import ru.vitalysizov.moviedb.domain.mapper.account.AccountDetailsMapper
 import ru.vitalysizov.moviedb.domain.useCase.base.SingleWithParamsUseCase
 import ru.vitalysizov.moviedb.model.domain.account.AccountDetailsItem

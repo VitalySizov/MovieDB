@@ -19,7 +19,8 @@ class AccountDetailsMapper @Inject constructor() :
             iso_3166_1 = from.iso_3166_1.orEmpty(),
             name = from.name.orEmpty(),
             includeAdult = from.includeAdult ?: false,
-            userName = from.userName.orEmpty()
+            userName = from.userName.orEmpty(),
+            avatarUrl = ""
         )
     }
 }
