@@ -14,4 +14,15 @@ class SystemViewModel @Inject constructor() : ViewModel() {
     fun setAuthRequestToken(requestToken: String) {
         authRequestTokenMutable.value = Event(requestToken)
     }
+
+    private val showBottomNavigationMutable = MutableLiveData(Event(true))
+    val showBottomNavigation : LiveData<Event<Boolean>> get() = showBottomNavigationMutable
+
+    fun onShowBottomNavigation() {
+        showBottomNavigationMutable.value = Event(true)
+    }
+
+    fun onHideBottomNavigation() {
+        showBottomNavigationMutable.value = Event(false)
+    }
 }

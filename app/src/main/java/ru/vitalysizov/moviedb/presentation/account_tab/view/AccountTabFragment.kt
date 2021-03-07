@@ -14,18 +14,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import dagger.android.support.DaggerFragment
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.databinding.FragmentAccountTabBinding
 import ru.vitalysizov.moviedb.presentation.account_tab.viewmodel.AccountTabViewModel
 import ru.vitalysizov.moviedb.presentation.activity.SystemViewModel
 import ru.vitalysizov.moviedb.presentation.authentication.view.AuthenticationFragmentArgs
-import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragmentArgs
+import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
 import ru.vitalysizov.moviedb.utils.CustomTabHelper
-import ru.vitalysizov.moviedb.utils.visibleOrGone
 import javax.inject.Inject
 
-class AccountTabFragment : DaggerFragment() {
+class AccountTabFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -60,6 +58,10 @@ class AccountTabFragment : DaggerFragment() {
 
         binding.btnLogout.setOnClickListener {
             accountTabViewModel.onLogoutClicked()
+        }
+
+        binding.btnSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_accountTabFragment_to_settingsFragment)
         }
 
         systemViewModel.authRequestToken.observe(viewLifecycleOwner, { authRequestToken ->

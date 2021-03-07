@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.databinding.FragmentMainBinding
+import ru.vitalysizov.moviedb.presentation.activity.SystemViewModel
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
 import ru.vitalysizov.moviedb.presentation.main.utils.setupWithNavController
 import ru.vitalysizov.moviedb.presentation.main.viewmodel.MainViewModel
@@ -29,6 +31,8 @@ class MainFragment : BaseFragment() {
         factoryProducer = { viewModelFactory }
     )
 
+    private val systemViewModel: SystemViewModel by activityViewModels()
+
     lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
@@ -45,6 +49,7 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBottomNavigation()
+        initVisibilityBottomNavigation()
     }
 
     private fun initBottomNavigation() {
@@ -83,5 +88,23 @@ class MainFragment : BaseFragment() {
                 mainBottomNavigation.visible()
             }
         }
+    }
+
+    private fun initVisibilityBottomNavigation() {
+        val mainBottomNavigation = binding.mainBottomNavigation
+        systemViewModel.showBottomNavigation.observe(viewLifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let { isShow ->
+                if (mainBottomNavigation.isShown == isShow) {
+                    return@let
+                }
+                if (isShow) {
+                    mainBottomNavigation.restoreBottomNavigation()
+                    mainBottomNavigation.visible()
+                } else {
+                    mainBottomNavigation.hideBottomNavigation()
+                    mainBottomNavigation.gone()
+                }
+            }
+        })
     }
 }

@@ -13,14 +13,23 @@
         <action
             android:id="@+id/action_accountTabFragment_to_authenticationFragment"
             app:destination="@id/authenticationFragment" />
+        <action
+            android:id="@+id/action_accountTabFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/authenticationFragment"
         android:name="ru.vitalysizov.moviedb.presentation.authentication.view.AuthenticationFragment"
-        android:label="AuthenticationFragment">
+        android:label="AuthenticationFragment"
+        tools:layout="@layout/fragment_authentication">
         <argument
             android:name="authUrl"
             android:defaultValue=""
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.settings.view.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
