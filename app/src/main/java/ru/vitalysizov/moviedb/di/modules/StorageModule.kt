@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import ru.vitalysizov.moviedb.data.local.prefs.AccountPreferences
+import ru.vitalysizov.moviedb.data.local.prefs.ConfigurationPreferences
 import javax.inject.Singleton
 
 @Module
@@ -21,5 +22,11 @@ class StorageModule {
     @Singleton
     fun provideAccountPreferences(sharedPreferences: SharedPreferences): AccountPreferences {
         return AccountPreferences(sharedPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideConfigurationPreferences(sharedPreferences: SharedPreferences): ConfigurationPreferences {
+        return ConfigurationPreferences(sharedPreferences)
     }
 }

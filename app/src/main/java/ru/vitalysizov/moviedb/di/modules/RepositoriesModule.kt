@@ -53,4 +53,10 @@ class RepositoriesModule {
     fun provideMovieDbWebRepository(): MovieDbWebService {
         return MovieDbWebRepository()
     }
+
+    @Provides
+    @Singleton
+    fun provideConfigurationRepository(apiService: IMovieDbApiService): ConfigurationRepository {
+        return ConfigurationRepository(apiService)
+    }
 }

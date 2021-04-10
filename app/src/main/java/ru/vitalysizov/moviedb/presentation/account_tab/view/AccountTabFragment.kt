@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.databinding.FragmentAccountTabBinding
@@ -64,13 +65,13 @@ class AccountTabFragment : BaseFragment() {
             findNavController().navigate(R.id.action_accountTabFragment_to_settingsFragment)
         }
 
-        systemViewModel.authRequestToken.observe(viewLifecycleOwner, { authRequestToken ->
+        systemViewModel.authRequestToken.observe(viewLifecycleOwner) { authRequestToken ->
             authRequestToken.getContentIfNotHandled()?.let { requestToken ->
                 accountTabViewModel.onCreateSessionAndGetAccount(requestToken)
             }
-        })
+        }
 
-        accountTabViewModel.authUrl.observe(viewLifecycleOwner, { authUrl ->
+        accountTabViewModel.authUrl.observe(viewLifecycleOwner) { authUrl ->
             authUrl.getContentIfNotHandled()?.let {
                 val customTabsBuilder = CustomTabsIntent.Builder()
                 val customTabColorSchemeParams = CustomTabColorSchemeParams.Builder()
@@ -118,7 +119,7 @@ class AccountTabFragment : BaseFragment() {
                     customTabsIntent.launchUrl(requireContext(), Uri.parse(it))
                 }
             }
-        })
+        }
     }
 
 }

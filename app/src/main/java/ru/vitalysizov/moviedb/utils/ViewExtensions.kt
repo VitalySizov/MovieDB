@@ -5,23 +5,20 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import coil.load
-import ru.vitalysizov.moviedb.BuildConfig
 import ru.vitalysizov.moviedb.R
-
-const val BASE_IMG_URL = BuildConfig.BASE_IMG_URL
 
 fun ImageView.loadImage(url: String?) {
     if (url.isNullOrEmpty()) {
         return
     }
-    this.load("$BASE_IMG_URL$url")
+    this.load(url)
 }
 
 fun ImageView.loadPersonPhoto(url: String?) {
     if (url.isNullOrEmpty()) {
         this.load(R.drawable.ic_baseline_person_24)
     } else {
-        this.load("$BASE_IMG_URL$url")
+        this.load(url)
     }
 }
 
@@ -29,7 +26,7 @@ fun ImageView.loadPosterPhoto(url: String?) {
     if (url.isNullOrEmpty()) {
         this.load(R.drawable.ic_baseline_local_movies_24)
     } else {
-        this.load("$BASE_IMG_URL$url")
+        this.load(url)
     }
 }
 
@@ -37,7 +34,7 @@ fun ImageView.loadCompanyLogo(url: String?) {
     if (url.isNullOrEmpty()) {
         this.load(R.drawable.ic_baseline_location_city_24)
     } else {
-        this.load("$BASE_IMG_URL$url")
+        this.load(url)
     }
 }
 

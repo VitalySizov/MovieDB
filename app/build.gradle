@@ -17,7 +17,8 @@ android {
         buildConfigField 'String', 'API_KEY', '"13847aa040037f1de9e84ea1f853d0fb"'
         buildConfigField 'String', 'BASE_API_URL', '"https://api.themoviedb.org/3/"'
         buildConfigField 'String', 'BASE_WEB_URL', '"https://themoviedb.org"'
-        buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/w500"'
+        buildConfigField 'String', 'BASE_IMG_URL', '"https://image.tmdb.org/t/p/"'
+        buildConfigField 'String', 'DEFAULT_IMG_QUALITY', '"w500"'
 
         buildConfigField 'String', 'TMDB_AUTH_URL', '"https://www.themoviedb.org/authenticate/"'
         buildConfigField 'String', 'AUTH_REDIRECT', '"?redirect_to=auth://auth_callback"'

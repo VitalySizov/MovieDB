@@ -13,6 +13,7 @@ import ru.vitalysizov.moviedb.model.network.responses.base.BaseResponse
 import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastAndCrewResponse
 import ru.vitalysizov.moviedb.model.network.responses.collections.CollectionItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.companies.CompanyItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.configuration.ConfigurationResponse
 import ru.vitalysizov.moviedb.model.network.responses.genres.GenresResponse
 import ru.vitalysizov.moviedb.model.network.responses.keywords.KeywordItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
@@ -159,4 +160,7 @@ interface IMovieDbApiService {
 
     @HTTP(method = "DELETE", path = "authentication/session", hasBody = true)
     fun logoutAccount(@Body deleteSessionParams: DeleteSessionParams): Single<LogoutResponse>
+
+    @GET("configuration")
+    fun getConfiguration(): Single<ConfigurationResponse>
 }

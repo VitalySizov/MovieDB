@@ -5,6 +5,9 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
 import ru.vitalysizov.moviedb.domain.mapper.genres.GenresMapper
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
+import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
 import ru.vitalysizov.moviedb.domain.mapper.movies.belongsToCollection.BelongsToCollectionMapper
 import ru.vitalysizov.moviedb.domain.mapper.movies.productionCompanies.ProductionCompaniesMapper
 import ru.vitalysizov.moviedb.domain.mapper.movies.productionCountries.ProductionCountriesMapper
@@ -18,7 +21,8 @@ class MovieDetailsMapper @Inject constructor(
     private val genresMapper: GenresMapper,
     private val productionCompaniesMapper: ProductionCompaniesMapper,
     private val productionCountriesMapper: ProductionCountriesMapper,
-    private val spokenLanguagesMapper: SpokenLanguagesMapper
+    private val spokenLanguagesMapper: SpokenLanguagesMapper,
+    private val imageUrlMapper: ImageUrlMapper
 ) : Mapper<MovieDetailsItemResponse, MovieDetailsItem> {
 
     override fun map(from: MovieDetailsItemResponse): MovieDetailsItem {
@@ -26,11 +30,21 @@ class MovieDetailsMapper @Inject constructor(
             popularity = from.popularity ?: 0.0,
             voteCount = from.voteCount ?: 0,
             video = from.video ?: false,
-            posterPath = from.posterPath.orEmpty(),
+            posterPath = imageUrlMapper.map(
+                UrlPathAndType(
+                    path = from.posterPath.orEmpty(),
+                    imageType = ImageTypes.IMAGE_POSTER
+                )
+            ),
             id = from.id ?: 0,
             adult = from.adult ?: false,
             overview = from.overview.orEmpty(),
-            backDropPath = from.backDropPath.orEmpty(),
+            backDropPath = imageUrlMapper.map(
+                UrlPathAndType(
+                    path = from.backDropPath.orEmpty(),
+                    imageType = ImageTypes.IMAGE_BACKDROP
+                )
+            ),
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
             releaseDate = if (!from.releaseDate.isNullOrEmpty()) {

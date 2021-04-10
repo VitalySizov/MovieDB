@@ -6,7 +6,7 @@ data class AccountDetailsItem(
     val iso_639_1: String,
     val iso_3166_1: String,
     val name: String,
-    val includeAdult: Boolean,
+    var includeAdult: Boolean,
     val userName: String,
     var avatarUrl: String
 )

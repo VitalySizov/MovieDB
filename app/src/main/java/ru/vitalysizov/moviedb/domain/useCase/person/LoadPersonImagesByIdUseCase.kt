@@ -2,7 +2,8 @@ package ru.vitalysizov.moviedb.domain.useCase.person
 
 import io.reactivex.Single
 import ru.vitalysizov.moviedb.data.repo.IPeopleRepository
-import ru.vitalysizov.moviedb.domain.mapper.movies.ImagesMapper
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
+import ru.vitalysizov.moviedb.domain.mapper.images.ImagesMapper
 import ru.vitalysizov.moviedb.domain.useCase.base.SingleWithParamsUseCase
 import ru.vitalysizov.moviedb.model.domain.person.PersonImages
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class LoadPersonImagesByIdUseCase @Inject constructor(
         return peopleRepository.getImagesForPerson(params).map {
             PersonImages(
                 id = it.id ?: -1,
-                imagesList = imagesMapper.map(it.imagesList)
+                imagesList = imagesMapper.map(Pair(it.imagesList, ImageTypes.IMAGE_PROFILE))
             )
         }
     }

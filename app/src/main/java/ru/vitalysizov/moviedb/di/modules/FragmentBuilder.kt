@@ -12,12 +12,14 @@ import ru.vitalysizov.moviedb.di.modules.screens.person_details.PersonDetailsMod
 import ru.vitalysizov.moviedb.di.modules.screens.search_result.SearchResultFragmentBuilder
 import ru.vitalysizov.moviedb.di.modules.screens.search_result.SearchResultModule
 import ru.vitalysizov.moviedb.di.modules.screens.settings.SettingsFragmentBuilder
+import ru.vitalysizov.moviedb.di.modules.screens.splash.SplashFragmentBuilder
 import ru.vitalysizov.moviedb.presentation.authentication.view.AuthenticationFragment
 import ru.vitalysizov.moviedb.presentation.main.view.MainFragment
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragment
 import ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragment
 import ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragment
 import ru.vitalysizov.moviedb.presentation.settings.view.SettingsFragment
+import ru.vitalysizov.moviedb.presentation.splash.view.SplashFragment
 
 @Module
 interface FragmentBuilder {
@@ -39,5 +41,8 @@ interface FragmentBuilder {
 
     @ContributesAndroidInjector(modules = [SettingsFragmentBuilder::class])
     fun contributeSettingsFragment(): SettingsFragment
+
+    @ContributesAndroidInjector(modules = [SplashFragmentBuilder::class])
+    fun contributeSplashFragment(): SplashFragment
 
 }
