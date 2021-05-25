@@ -1,18 +1,34 @@
 package ru.vitalysizov.moviedb.domain.mapper.tvShows
 
 import org.threeten.bp.LocalDate
+import ru.vitalysizov.moviedb.data.local.prefs.ConfigurationPreferences
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
+import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
 import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowItem
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
 import javax.inject.Inject
 
-class TvShowsMapper @Inject constructor() : Mapper<TvShowItemResponse, TvShowItem> {
+class TvShowsMapper @Inject constructor(
+    private val imageUrlMapper: ImageUrlMapper
+) : Mapper<TvShowItemResponse, TvShowItem> {
     override fun map(from: TvShowItemResponse): TvShowItem {
         return TvShowItem(
-            posterPath = from.posterPath.orEmpty(),
+            posterPath = imageUrlMapper.map(
+                UrlPathAndType(
+                    path = from.posterPath.orEmpty(),
+                    imageType = ImageTypes.IMAGE_POSTER
+                )
+            ),
             popularity = from.popularity ?: 0.0,
             id = from.id ?: -1,
-            backdropPath = from.backdropPath.orEmpty(),
+            backdropPath = imageUrlMapper.map(
+                UrlPathAndType(
+                    path = from.backdropPath.orEmpty(),
+                    imageType = ImageTypes.IMAGE_BACKDROP
+                )
+            ),
             voteAverage = from.voteAverage.toString(),
             overview = from.overview.orEmpty(),
             firstAirDate = if (!from.firstAirDate.isNullOrEmpty()) {

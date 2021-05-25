@@ -8,7 +8,7 @@ class IncludeImageLanguageInterceptor @Inject constructor() : Interceptor {
 
     private companion object {
         const val INCLUDE_IMAGE_LANGUAGE = "include_image_language"
-        const val LANGUAGE_PARAMS = "en, null"
+        const val LANGUAGE_PARAMS = "null"
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {

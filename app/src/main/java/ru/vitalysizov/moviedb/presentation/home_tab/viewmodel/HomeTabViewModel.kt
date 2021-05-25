@@ -46,7 +46,6 @@ class HomeTabViewModel @Inject constructor(
         get() = _movieDetailsClick
 
     init {
-        showLoading()
         loadHomeTabContent()
     }
 
@@ -75,8 +74,10 @@ class HomeTabViewModel @Inject constructor(
                         trendingMoviesByWeek,
                         genres
                     )
-                }).subscribe({
-                hideLoading()
+                })
+                .doOnSubscribe { showLoading() }
+                .doAfterTerminate { hideLoading() }
+                .subscribe({
                 handleSuccessLoadHomeTabContent(it)
             }, {
                 handleError(it)

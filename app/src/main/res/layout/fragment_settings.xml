@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.vitalysizov.moviedb.presentation.settings.viewmodel.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/includeAppBar"
+            layout="@layout/include_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchAdultContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_default"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/padding_default"
+            android:checked="@{viewModel.accountPreferences.account.includeAdult}"
+            android:text="@string/adult_content"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/includeAppBar" />
+
+        <LinearLayout
+            android:id="@+id/containerImageQuality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/padding_default"
+            android:paddingTop="8dp"
+            android:paddingEnd="@dimen/padding_default"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchAdultContent">
+
+            <TextView
+                android:id="@+id/tvTitleImagesQuality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_picture_quality"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvImagesQualityValue"
+                setImageQualityValue="@{viewModel.imageQuality}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Высокое качество" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

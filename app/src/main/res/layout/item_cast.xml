@@ -20,15 +20,15 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCastPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="140dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
             app:loadPersonPhoto="@{castItem.profilePath}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCast"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="3"

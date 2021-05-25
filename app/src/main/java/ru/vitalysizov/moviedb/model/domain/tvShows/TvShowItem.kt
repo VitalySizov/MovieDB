@@ -3,17 +3,17 @@ package ru.vitalysizov.moviedb.model.domain.tvShows
 import org.threeten.bp.LocalDate
 
 data class TvShowItem(
-    val posterPath: String,
-    val popularity: Double,
-    val id: Int,
-    val backdropPath: String,
-    val voteAverage: String,
-    val overview: String,
-    val firstAirDate: LocalDate,
-    val originCountry: List<String>,
-    val genreIds: List<Int>,
-    val originalLanguage: String,
-    val voteCount: Int,
-    val name: String,
-    val originalName: String
-)
+    override val posterPath: String,
+    override val popularity: Double,
+    override val id: Int,
+    override val backdropPath: String,
+    override val voteAverage: String,
+    override val overview: String,
+    override val firstAirDate: LocalDate,
+    override val originCountry: List<String>,
+    override val genreIds: List<Int>,
+    override val originalLanguage: String,
+    override val voteCount: Int,
+    override val name: String,
+    override val originalName: String
+) : BaseTvShowItemData

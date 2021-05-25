@@ -10,6 +10,8 @@ abstract class BaseViewModel : ViewModel() {
 
     val loading = MutableLiveData<Boolean>()
 
+    private val isShowBottomNavigation = MutableLiveData<Boolean>(true)
+
     private val compositeDisposable = CompositeDisposable()
 
     fun launch(disposable: () -> Disposable) {
@@ -29,5 +31,13 @@ abstract class BaseViewModel : ViewModel() {
 
     fun hideLoading() {
         loading.value = false
+    }
+
+    fun showBottomNavigation() {
+        isShowBottomNavigation.value = true
+    }
+
+    fun hideBottomNavigation() {
+        isShowBottomNavigation.value = false
     }
 }

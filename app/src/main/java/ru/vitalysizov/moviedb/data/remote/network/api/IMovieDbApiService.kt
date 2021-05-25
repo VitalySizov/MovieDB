@@ -2,23 +2,31 @@ package ru.vitalysizov.moviedb.data.remote.network.api
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
+import ru.vitalysizov.moviedb.domain.params.authentication.CreateSessionParams
+import ru.vitalysizov.moviedb.domain.params.authentication.DeleteSessionParams
+import ru.vitalysizov.moviedb.model.network.responses.account.AccountDetailsResponse
+import ru.vitalysizov.moviedb.model.network.responses.authentication.LogoutResponse
+import ru.vitalysizov.moviedb.model.network.responses.authentication.RequestTokenResponse
+import ru.vitalysizov.moviedb.model.network.responses.authentication.SessionResponse
 import ru.vitalysizov.moviedb.model.network.responses.base.BaseResponse
 import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastAndCrewResponse
 import ru.vitalysizov.moviedb.model.network.responses.collections.CollectionItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.companies.CompanyItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.configuration.ConfigurationResponse
 import ru.vitalysizov.moviedb.model.network.responses.genres.GenresResponse
 import ru.vitalysizov.moviedb.model.network.responses.keywords.KeywordItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieImagesResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.movies.RatedMovieItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PeopleDetailsResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PeopleImagesResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PersonCombinedCreditsResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PersonExternalIdsResponse
 import ru.vitalysizov.moviedb.model.network.responses.persons.PersonItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvEpisodes.RatedTvEpisodeItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvShows.RatedTvShowItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
 
 interface IMovieDbApiService {
@@ -143,4 +151,44 @@ interface IMovieDbApiService {
      */
     @GET("person/{person_id}/images")
     fun getImagesForPerson(@Path("person_id") personId: Int): Single<PeopleImagesResponse>
+
+    @GET("authentication/token/new")
+    fun createRequestToken(): Single<RequestTokenResponse>
+
+    @POST("authentication/session/new")
+    fun createSession(@Body createSessionParams: CreateSessionParams): Single<SessionResponse>
+
+    @GET("account")
+    fun getAccountDetails(@Query("session_id") sessionId: String): Single<AccountDetailsResponse>
+
+    @HTTP(method = "DELETE", path = "authentication/session", hasBody = true)
+    fun logoutAccount(@Body deleteSessionParams: DeleteSessionParams): Single<LogoutResponse>
+
+    @GET("configuration")
+    fun getConfiguration(): Single<ConfigurationResponse>
+
+    @GET("account/{account_id}/rated/movies")
+    fun getRatedMovies(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessionId: String,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+    ): Single<BaseResponse<RatedMovieItemResponse>>
+
+    @GET("account/{account_id}/rated/tv")
+    fun getRatedTvShow(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessionId: String,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+    ): Single<BaseResponse<RatedTvShowItemResponse>>
+
+    @GET("account/{account_id}/rated/tv/episodes")
+    fun getRatedTvEpisodes(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessionId: String,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+    ): Single<BaseResponse<RatedTvEpisodeItemResponse>>
+
 }

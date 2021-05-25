@@ -9,5 +9,49 @@
         android:id="@+id/accountTabFragment"
         android:name="ru.vitalysizov.moviedb.presentation.account_tab.view.AccountTabFragment"
         android:label="AccountTabFragment"
-        tools:layout="@layout/fragment_account_tab" />
+        tools:layout="@layout/fragment_account_tab">
+        <action
+            android:id="@+id/action_accountTabFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
+        <action
+            android:id="@+id/action_accountTabFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_accountTabFragment_to_ratedFragment"
+            app:destination="@id/ratedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.authentication.view.AuthenticationFragment"
+        android:label="AuthenticationFragment"
+        tools:layout="@layout/fragment_authentication">
+        <argument
+            android:name="authUrl"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.settings.view.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/ratedFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.rated.RatedFragment"
+        android:label="RatedFragment" />
+    <fragment
+        android:id="@+id/ratedListFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.rated.RatedListFragment"
+        android:label="RatedListFragment"
+        tools:layout="@layout/fragment_rated">
+        <argument
+            android:name="ratedContent"
+            app:argType="ru.vitalysizov.moviedb.presentation.rated.content.RatedScreenContent" />
+        <argument
+            android:name="tab"
+            app:argType="ru.vitalysizov.moviedb.presentation.rated.content.RatedTab" />
+
+    </fragment>
+
+
 </navigation>

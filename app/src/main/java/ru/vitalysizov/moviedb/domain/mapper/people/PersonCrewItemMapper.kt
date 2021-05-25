@@ -1,11 +1,16 @@
 package ru.vitalysizov.moviedb.domain.mapper.people
 
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
+import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
+import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
 import ru.vitalysizov.moviedb.model.domain.person.PersonCrewItem
 import ru.vitalysizov.moviedb.model.network.responses.people.PersonCrewItemResponse
 import javax.inject.Inject
 
-class PersonCrewItemMapper @Inject constructor() : Mapper<PersonCrewItemResponse, PersonCrewItem> {
+class PersonCrewItemMapper @Inject constructor(
+    private val imageUrlMapper: ImageUrlMapper
+) : Mapper<PersonCrewItemResponse, PersonCrewItem> {
     override fun map(from: PersonCrewItemResponse): PersonCrewItem {
         return PersonCrewItem(
             id = from.id ?: -1,
@@ -22,10 +27,20 @@ class PersonCrewItemMapper @Inject constructor() : Mapper<PersonCrewItemResponse
             popularity = from.popularity ?: 0.0,
             creditId = from.creditId.orEmpty(),
             genreIds = from.genreIds ?: emptyList(),
-            backdropPath = from.backdropPath.orEmpty(),
+            backdropPath = imageUrlMapper.map(
+                UrlPathAndType(
+                    path = from.backdropPath.orEmpty(),
+                    imageType = ImageTypes.IMAGE_BACKDROP
+                )
+            ),
             firstAirDate = from.firstAirDate.orEmpty(),
             voteAverage = from.voteAverage ?: 0.0,
-            posterPath = from.posterPath.orEmpty(),
+            posterPath = imageUrlMapper.map(
+                UrlPathAndType(
+                    path = from.posterPath.orEmpty(),
+                    imageType = ImageTypes.IMAGE_POSTER
+                )
+            ),
             originalTitle = from.originalTitle.orEmpty(),
             video = from.video ?: false,
             adult = from.adult ?: false,

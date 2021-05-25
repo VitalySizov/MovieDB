@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            app:loadImage="@{movie.posterPath}"
+            app:loadImage="@{movie.backDropPath}"
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatTextView

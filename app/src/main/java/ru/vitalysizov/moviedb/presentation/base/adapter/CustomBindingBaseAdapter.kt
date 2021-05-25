@@ -29,3 +29,8 @@ fun loadPosterImage(imageView: ImageView, url: String) {
 fun loadCompanyLogoImage(imageView: ImageView, url: String) {
     imageView.loadCompanyLogo(url)
 }
+
+@BindingAdapter(value = ["loadAvatarImage"])
+fun loadAvatarImage(imageView: ImageView, url: String?) {
+    imageView.loadAvatarImage(url)
+}
