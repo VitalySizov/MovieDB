@@ -109,6 +109,9 @@ dependencies {
     // KeyboardVisibilityEvent
     implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${versions.keyboardVisibilityEvent}"
 
+    // ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

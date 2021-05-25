@@ -65,6 +65,10 @@ class AccountTabFragment : BaseFragment() {
             findNavController().navigate(R.id.action_accountTabFragment_to_settingsFragment)
         }
 
+        binding.btnRated.setOnClickListener {
+            findNavController().navigate(R.id.action_accountTabFragment_to_ratedFragment)
+        }
+
         systemViewModel.authRequestToken.observe(viewLifecycleOwner) { authRequestToken ->
             authRequestToken.getContentIfNotHandled()?.let { requestToken ->
                 accountTabViewModel.onCreateSessionAndGetAccount(requestToken)

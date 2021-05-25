@@ -19,11 +19,14 @@ import ru.vitalysizov.moviedb.model.network.responses.keywords.KeywordItemRespon
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieImagesResponse
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.movies.RatedMovieItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PeopleDetailsResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PeopleImagesResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PersonCombinedCreditsResponse
 import ru.vitalysizov.moviedb.model.network.responses.people.PersonExternalIdsResponse
 import ru.vitalysizov.moviedb.model.network.responses.persons.PersonItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvEpisodes.RatedTvEpisodeItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvShows.RatedTvShowItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
 
 interface IMovieDbApiService {
@@ -163,4 +166,29 @@ interface IMovieDbApiService {
 
     @GET("configuration")
     fun getConfiguration(): Single<ConfigurationResponse>
+
+    @GET("account/{account_id}/rated/movies")
+    fun getRatedMovies(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessionId: String,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+    ): Single<BaseResponse<RatedMovieItemResponse>>
+
+    @GET("account/{account_id}/rated/tv")
+    fun getRatedTvShow(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessionId: String,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+    ): Single<BaseResponse<RatedTvShowItemResponse>>
+
+    @GET("account/{account_id}/rated/tv/episodes")
+    fun getRatedTvEpisodes(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessionId: String,
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+    ): Single<BaseResponse<RatedTvEpisodeItemResponse>>
+
 }

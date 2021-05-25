@@ -69,6 +69,27 @@
             app:layout_constraintTop_toTopOf="@+id/tvName"
             tools:visibility="visible" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnRated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="@dimen/text_size_22"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            app:contentPadding="@dimen/padding_default"
+            app:goneUnless="@{viewModel.showLogoutButton}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivAvatar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rated" />
+
+        </com.google.android.material.card.MaterialCardView>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAuth"
             android:layout_width="match_parent"

@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">MovieDb</string>
 
-    <!--   Navigation title -->
+    <!-- Base -->
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="empty_list">Список пуст</string>
+
+    <!-- Navigation title -->
     <string name="home_tab">Home</string>
     <string name="search_tab">Search</string>
     <string name="account_tab">Account</string>
@@ -60,16 +65,17 @@
     <string name="settings_title">Настройки</string>
     <string name="adult_content">Взрослый контент</string>
     <string name="title_picture_quality">Качество изображений</string>
-
     <string-array name="image_qualities">
         <item>Низкое качество</item>
         <item>Среднее качество</item>
         <item>Высокое качество</item>
     </string-array>
 
-    <!-- Dialogs -->
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">Отмена</string>
-
+    <!-- Rated screen-->
+    <string name="rated">Оценные\nфильмы, сериалы, cерии</string>
+    <string name="rated_title">Оценные</string>
+    <string name="movies">Фильмы</string>
+    <string name="tv_shows">Сериалы</string>
+    <string name="tv_episodes">Серии</string>
 
 </resources>
