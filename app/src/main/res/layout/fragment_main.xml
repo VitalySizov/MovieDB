@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="ru.vitalysizov.moviedb.presentation.main.viewmodel.MainViewModel" />
@@ -18,9 +20,11 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/main_bottom_navigation_size" />
+            android:layout_height="@dimen/main_bottom_navigation_height"
+            app:menu="@menu/bottom_navigation_menu" />
+
     </LinearLayout>
 </layout>
