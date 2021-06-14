@@ -27,6 +27,7 @@ import ru.vitalysizov.moviedb.model.network.responses.people.PersonExternalIdsRe
 import ru.vitalysizov.moviedb.model.network.responses.persons.PersonItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvEpisodes.RatedTvEpisodeItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.RatedTvShowItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
 
 interface IMovieDbApiService {
@@ -190,5 +191,10 @@ interface IMovieDbApiService {
         @Query("sort_by") sortBy: String,
         @Query("page") page: Int,
     ): Single<BaseResponse<RatedTvEpisodeItemResponse>>
+
+    @GET("tv/{tv_id}")
+    fun getTvShowDetailsById(
+        @Path("tv_id") tvId: Int,
+    ): Single<TvShowDetailsItemResponse>
 
 }

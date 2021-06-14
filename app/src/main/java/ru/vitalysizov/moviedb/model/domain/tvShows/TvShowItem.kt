@@ -11,9 +11,9 @@ data class TvShowItem(
     override val overview: String,
     override val firstAirDate: LocalDate,
     override val originCountry: List<String>,
-    override val genreIds: List<Int>,
     override val originalLanguage: String,
     override val voteCount: Int,
     override val name: String,
-    override val originalName: String
+    override val originalName: String,
+    val genreIds: List<Int>
 ) : BaseTvShowItemData

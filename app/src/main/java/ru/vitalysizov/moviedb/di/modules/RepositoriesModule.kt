@@ -50,6 +50,12 @@ class RepositoriesModule {
 
     @Provides
     @Singleton
+    fun provideTvShowsRepository(apiService: IMovieDbApiService): ITvShowsRepository {
+        return TvShowsRepository(apiService)
+    }
+
+    @Provides
+    @Singleton
     fun provideMovieDbWebRepository(): MovieDbWebService {
         return MovieDbWebRepository()
     }

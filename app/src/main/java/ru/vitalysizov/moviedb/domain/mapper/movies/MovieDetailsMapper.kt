@@ -14,6 +14,7 @@ import ru.vitalysizov.moviedb.domain.mapper.movies.productionCountries.Productio
 import ru.vitalysizov.moviedb.domain.mapper.movies.spokenLanguages.SpokenLanguagesMapper
 import ru.vitalysizov.moviedb.model.domain.movies.MovieDetailsItem
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieDetailsItemResponse
+import ru.vitalysizov.moviedb.utils.DateHelper
 import javax.inject.Inject
 
 class MovieDetailsMapper @Inject constructor(
@@ -47,11 +48,7 @@ class MovieDetailsMapper @Inject constructor(
             ),
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
-            releaseDate = if (!from.releaseDate.isNullOrEmpty()) {
-                LocalDate.parse(from.releaseDate)
-            } else {
-                LocalDate.of(0, 1, 1)
-            },
+            releaseDate = DateHelper.getLocalDate(from.releaseDate),
             title = from.title.orEmpty(),
             voteAverage = from.voteAverage ?: 0.0,
             budget = from.budget ?: 0,

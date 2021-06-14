@@ -1,12 +1,12 @@
 package ru.vitalysizov.moviedb.domain.mapper.movies
 
-import org.threeten.bp.LocalDate
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
 import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
 import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
 import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
 import ru.vitalysizov.moviedb.model.network.responses.movies.MovieItemResponse
+import ru.vitalysizov.moviedb.utils.DateHelper
 import javax.inject.Inject
 
 class MoviesMapper @Inject constructor(
@@ -34,11 +34,7 @@ class MoviesMapper @Inject constructor(
             originalLanguage = from.originalLanguage.orEmpty(),
             originalTitle = from.originalTitle.orEmpty(),
             genreIds = from.genreIds ?: listOf(),
-            releaseDate = if (!from.releaseDate.isNullOrEmpty()) {
-                LocalDate.parse(from.releaseDate)
-            } else {
-                LocalDate.of(0, 1, 1)
-            },
+            releaseDate = DateHelper.getLocalDate(from.releaseDate),
             overview = from.overview.orEmpty(),
             title = from.title.orEmpty(),
             voteAverage = from.voteAverage.toString()

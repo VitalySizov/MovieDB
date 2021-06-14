@@ -11,7 +11,6 @@ interface BaseTvShowItemData {
     val overview: String
     val firstAirDate: LocalDate
     val originCountry: List<String>
-    val genreIds: List<Int>
     val originalLanguage: String
     val voteCount: Int
     val name: String
