@@ -9,5 +9,6 @@
     <color name="gray">#808080</color>
 
     <color name="gray_light">#f0f0f0</color>
+    <color name="background_rating">#A9808080</color>
 
 </resources>

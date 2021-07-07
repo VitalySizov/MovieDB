@@ -17,7 +17,9 @@
         <include
             layout="@layout/include_item_movie"
             app:posterPath="@{movie.posterPath}"
-            app:title="@{movie.title}" />
+            app:title="@{movie.title}"
+            app:voteAverage="@{movie.voteAverage}"
+            />
 
     </FrameLayout>
 
