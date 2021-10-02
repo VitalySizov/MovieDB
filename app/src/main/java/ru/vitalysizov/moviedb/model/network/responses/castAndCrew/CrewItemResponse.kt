@@ -23,6 +23,18 @@ data class CrewItemResponse(
     val name: String?,
 
     @SerializedName("profile_path")
-    val profilePath: String?
+    val profilePath: String?,
+
+    @SerializedName("adult")
+    val adult: Boolean?,
+
+    @SerializedName("known_for_department")
+    val knownForDepartment: String?,
+
+    @SerializedName("original_name")
+    val originalName: String?,
+
+    @SerializedName("popularity")
+    val popularity: Double?
 
 )

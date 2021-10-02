@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_to_peopleDetailsFragment"
             app:destination="@id/personDetailsFragment" />
+        <action
+            android:id="@+id/action_searchTabFragment_to_tvShowDetailsFragment"
+            app:destination="@id/tvShowDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -48,6 +51,15 @@
         tools:layout="@layout/fragment_person_details">
         <argument
             android:name="peopleId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowDetailsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.tv_show_details.TvShowDetailsFragment"
+        android:label="TvShowDetailsFragment"
+        tools:layout="@layout/fragment_tv_show_details">
+        <argument
+            android:name="tvShowId"
             app:argType="integer" />
     </fragment>
 </navigation>

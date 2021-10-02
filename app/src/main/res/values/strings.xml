@@ -78,4 +78,18 @@
     <string name="tv_shows">Сериалы</string>
     <string name="tv_episodes">Серии</string>
 
+    <plurals name="vote_count_plurals">
+        <item quantity="zero">оценки отсутсвуют</item>
+        <item quantity="one">1 оценка</item>
+        <item quantity="two">2 оценки</item>
+        <item quantity="few">%d оценки</item>
+        <item quantity="many">%d оценки</item>
+        <item quantity="other">%d оценки</item>
+    </plurals>
+
+    <!-- TvShow details-->
+    <string name="button_estimate">Оценить</string>
+    <string name="title_rating_the_movie_db">Рейтинг TheMovieDb</string>
+    <string name="button_add_to_favorite">Добавить в избранное</string>
+
 </resources>

@@ -16,6 +16,8 @@ import ru.vitalysizov.moviedb.di.modules.screens.search_result.SearchResultFragm
 import ru.vitalysizov.moviedb.di.modules.screens.search_result.SearchResultModule
 import ru.vitalysizov.moviedb.di.modules.screens.settings.SettingsFragmentBuilder
 import ru.vitalysizov.moviedb.di.modules.screens.splash.SplashFragmentBuilder
+import ru.vitalysizov.moviedb.di.modules.screens.tv_show_details.TvShowDetailsFragmentBuilder
+import ru.vitalysizov.moviedb.di.modules.screens.tv_show_details.TvShowDetailsModule
 import ru.vitalysizov.moviedb.presentation.authentication.view.AuthenticationFragment
 import ru.vitalysizov.moviedb.presentation.main.view.MainFragment
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragment
@@ -25,6 +27,7 @@ import ru.vitalysizov.moviedb.presentation.rated.RatedListFragment
 import ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragment
 import ru.vitalysizov.moviedb.presentation.settings.view.SettingsFragment
 import ru.vitalysizov.moviedb.presentation.splash.view.SplashFragment
+import ru.vitalysizov.moviedb.presentation.tv_show_details.TvShowDetailsFragment
 
 @Module
 interface FragmentBuilder {
@@ -55,5 +58,8 @@ interface FragmentBuilder {
 
     @ContributesAndroidInjector(modules = [RatedListModule::class, RatedListFragmentBuilder::class])
     fun contributeRatedListFragment(): RatedListFragment
+
+    @ContributesAndroidInjector(modules = [TvShowDetailsModule::class, TvShowDetailsFragmentBuilder::class])
+    fun contributeTvShowDetailsFragment(): TvShowDetailsFragment
 
 }

@@ -4,6 +4,7 @@ import ru.vitalysizov.moviedb.domain.mapper.Mapper
 import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
 import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
 import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
+import ru.vitalysizov.moviedb.model.domain.enumerations.GenderType
 import ru.vitalysizov.moviedb.model.domain.person.PersonDetails
 import ru.vitalysizov.moviedb.model.network.responses.people.PeopleDetailsResponse
 import ru.vitalysizov.moviedb.utils.DateHelper
@@ -22,7 +23,9 @@ class PeopleDetailsMapper @Inject constructor(
             name = from.name.orEmpty(),
             alsoKnownAs = from.alsoKnownAs ?: emptyList(),
             popularity = from.popularity ?: 0.0,
-            gender = from.gender ?: 0,
+            gender = GenderType.fromIdentifier(
+                from.gender ?: GenderType.NOT_SPECIFIED.identifier
+            ),
             placeOfBirth = from.placeOfBirth.orEmpty(),
             profilePath = imageUrlMapper.map(
                 UrlPathAndType(

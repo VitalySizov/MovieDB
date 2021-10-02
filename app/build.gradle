@@ -32,6 +32,8 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding true
+        compose true
     }
 
     buildTypes {
@@ -39,6 +41,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0-alpha05"
     }
 
     compileOptions {
@@ -97,6 +103,7 @@ dependencies {
 
     // Koil (image loading library)
     implementation "io.coil-kt:coil:${versions.koil}"
+    implementation "io.coil-kt:coil-compose:${versions.koil}"
 
     // ThreeTenABP (Time)
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.threeTenABP}"
@@ -107,6 +114,39 @@ dependencies {
     // ViewPager2
     implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
 
+    // Compose
+    implementation "androidx.compose.ui:ui:${versions.compose}"
+
+    // Compose compiler
+    implementation "androidx.compose.compiler:compiler:${versions.composeCompiler}"
+
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:${versions.compose}"
+
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:${versions.compose}"
+
+    // Material Design
+    implementation "androidx.compose.material:material:${versions.compose}"
+
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:${versions.compose}"
+    implementation "androidx.compose.material:material-icons-extended:${versions.compose}"
+
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime-livedata:${versions.compose}"
+
+    // Integration with activities
+    implementation "androidx.activity:activity-compose:${versions.composeActivity}"
+
+    // Integration with ViewModels
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:${versions.composeViewModel}"
+
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout-compose:${versions.composeConstraintLayout}"
+
+    // Tests
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4${versions.compose}"
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

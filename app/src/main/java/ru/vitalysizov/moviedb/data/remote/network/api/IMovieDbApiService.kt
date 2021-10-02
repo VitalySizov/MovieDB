@@ -26,6 +26,7 @@ import ru.vitalysizov.moviedb.model.network.responses.people.PersonCombinedCredi
 import ru.vitalysizov.moviedb.model.network.responses.people.PersonExternalIdsResponse
 import ru.vitalysizov.moviedb.model.network.responses.persons.PersonItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvEpisodes.RatedTvEpisodeItemResponse
+import ru.vitalysizov.moviedb.model.network.responses.tvShows.ContentRatingsResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.RatedTvShowItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowDetailsItemResponse
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowItemResponse
@@ -196,5 +197,21 @@ interface IMovieDbApiService {
     fun getTvShowDetailsById(
         @Path("tv_id") tvId: Int,
     ): Single<TvShowDetailsItemResponse>
+
+    @GET("tv/{tv_id}/images")
+    fun getTvShowImages(
+        @Path("tv_id") tvId: Int
+    ): Single<MovieImagesResponse>
+
+    @GET("tv/{tv_id}/credits")
+    fun getTvShowCredits(
+        @Path("tv_id") tvId: Int
+    ): Single<CastAndCrewResponse>
+
+    @GET("tv/{tv_id}/content_ratings")
+    fun getTvShowContentRatings(
+        @Path("tv_id") tvId: Int
+    ): Single<ContentRatingsResponse>
+
 
 }

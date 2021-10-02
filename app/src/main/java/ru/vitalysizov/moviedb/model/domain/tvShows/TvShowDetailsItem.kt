@@ -2,6 +2,7 @@ package ru.vitalysizov.moviedb.model.domain.tvShows
 
 import org.threeten.bp.LocalDate
 import ru.vitalysizov.moviedb.model.domain.GenreItem
+import ru.vitalysizov.moviedb.model.domain.enumerations.TvShowStatus
 import ru.vitalysizov.moviedb.model.domain.production.ProductionCompaniesItem
 import ru.vitalysizov.moviedb.model.domain.production.ProductionCountriesItem
 
@@ -34,7 +35,52 @@ data class TvShowDetailsItem(
     val productionCountries: List<ProductionCountriesItem>,
     val seasons: List<SeasonItem>,
     val spokenLanguages: List<TvShowSpokenLanguagesItem>,
-    val status: String,
+    val status: TvShowStatus,
     val tagline: String,
     val type: String
-) : BaseTvShowItemData
+) : BaseTvShowItemData {
+
+    fun getActiveYears(): String {
+        val startYear = firstAirDate.year
+        val endYear = lastAirDate.year
+
+        buildString {
+            if (startYear == 0) {
+                append("?")
+            } else {
+                append(startYear)
+            }
+
+            append(" - ")
+
+            if (endYear == 0) {
+                append("?")
+            } else {
+                append(endYear)
+            }
+            return this.toString()
+        }
+    }
+
+    fun getInfo(): String {
+        val countries = originCountry.joinToString()
+        val runTimeMax = episodeRunTime.maxOrNull()
+        val runTimeMin = episodeRunTime.minOrNull()
+
+        buildString {
+            append(countries)
+            if (runTimeMax != null && runTimeMin != null) {
+                append(" | ")
+                if (runTimeMax != runTimeMin) {
+                    append(runTimeMin)
+                    append("-")
+                    append(runTimeMax)
+                } else {
+                    append(runTimeMax)
+                }
+            }
+            return this.toString()
+        }
+    }
+
+}

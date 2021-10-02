@@ -20,6 +20,7 @@ import ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFrag
 import ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragmentArgs
 import ru.vitalysizov.moviedb.presentation.search_tab.adapters.SearchTabAdapter
 import ru.vitalysizov.moviedb.presentation.search_tab.viewmodel.SearchTabViewModel
+import ru.vitalysizov.moviedb.presentation.tv_show_details.TvShowDetailsFragmentArgs
 import ru.vitalysizov.moviedb.utils.dismissKeyboard
 import javax.inject.Inject
 
@@ -76,7 +77,7 @@ class SearchTabFragment : BaseFragment() {
     }
 
     private fun onClickTvShow(item: TvShowItem) {
-
+        searchTabViewModel.onTvShowItemClicked(item.id)
     }
 
     private fun onClickPerson(item: PersonItem) {
@@ -101,6 +102,16 @@ class SearchTabFragment : BaseFragment() {
                 val args = MovieDetailsFragmentArgs(it)
                 findNavController().navigate(
                     R.id.action_searchTabFragment_to_movieDetailsFragment2,
+                    args.toBundle()
+                )
+            }
+        })
+
+        searchTabViewModel.tvShowDetailsClicked.observe(viewLifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let {
+                val args = TvShowDetailsFragmentArgs(it)
+                findNavController().navigate(
+                    R.id.action_searchTabFragment_to_tvShowDetailsFragment,
                     args.toBundle()
                 )
             }

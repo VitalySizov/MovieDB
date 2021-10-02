@@ -1,6 +1,7 @@
 package ru.vitalysizov.moviedb.model.domain.person
 
 import org.threeten.bp.LocalDate
+import ru.vitalysizov.moviedb.model.domain.enumerations.GenderType
 
 data class PersonDetails(
     val birthDay: LocalDate,
@@ -9,7 +10,7 @@ data class PersonDetails(
     val id: Int,
     val name: String,
     val alsoKnownAs: List<String>,
-    val gender: Int,
+    val gender: GenderType,
     val biography: String,
     val popularity: Double,
     val placeOfBirth: String,

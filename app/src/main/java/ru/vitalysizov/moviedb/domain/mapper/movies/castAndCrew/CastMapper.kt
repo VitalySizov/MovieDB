@@ -5,6 +5,7 @@ import ru.vitalysizov.moviedb.domain.mapper.images.ImageTypes
 import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
 import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
 import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastItem
+import ru.vitalysizov.moviedb.model.domain.enumerations.GenderType
 import ru.vitalysizov.moviedb.model.network.responses.castAndCrew.CastItemResponse
 import javax.inject.Inject
 
@@ -21,7 +22,9 @@ class CastMapper @Inject constructor(
                     castId = it.castId ?: 0,
                     character = it.character.orEmpty(),
                     creditId = it.creditId.orEmpty(),
-                    gender = it.gender ?: -1,
+                    gender = GenderType.fromIdentifier(
+                        it.gender ?: GenderType.NOT_SPECIFIED.identifier
+                    ),
                     id = it.id ?: 0,
                     name = it.name.orEmpty(),
                     order = it.order ?: 0,
@@ -30,7 +33,11 @@ class CastMapper @Inject constructor(
                             path = it.profilePath.orEmpty(),
                             imageType = ImageTypes.IMAGE_PROFILE
                         )
-                    )
+                    ),
+                    adult = it.adult ?: false,
+                    knownForDepartment = it.knownForDepartment.orEmpty(),
+                    originalName = it.originalName.orEmpty(),
+                    popularity = it.popularity ?: 0.0
                 )
             }
         }

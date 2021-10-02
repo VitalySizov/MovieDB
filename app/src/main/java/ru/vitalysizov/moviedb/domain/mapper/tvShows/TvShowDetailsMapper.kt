@@ -7,6 +7,7 @@ import ru.vitalysizov.moviedb.domain.mapper.images.ImageUrlMapper
 import ru.vitalysizov.moviedb.domain.mapper.images.UrlPathAndType
 import ru.vitalysizov.moviedb.domain.mapper.movies.productionCompanies.ProductionCompaniesMapper
 import ru.vitalysizov.moviedb.domain.mapper.movies.productionCountries.ProductionCountriesMapper
+import ru.vitalysizov.moviedb.model.domain.enumerations.TvShowStatus
 import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowDetailsItem
 import ru.vitalysizov.moviedb.model.network.responses.tvShows.TvShowDetailsItemResponse
 import ru.vitalysizov.moviedb.utils.DateHelper
@@ -64,7 +65,7 @@ class TvShowDetailsMapper @Inject constructor(
             productionCountries = productionCountriesMapper.map(from.productionCountries),
             seasons = from.seasons?.map { seasonsMapper.map(it) } ?: emptyList(),
             spokenLanguages = from.spokenLanguages?.map { tvShowSpokenLanguagesMapper.map(it) } ?: emptyList(),
-            status = from.status.orEmpty(),
+            status = TvShowStatus.fromIdentifier(from.status.orEmpty()),
             tagline = from.tagline.orEmpty(),
             type = from.type.orEmpty()
         )
