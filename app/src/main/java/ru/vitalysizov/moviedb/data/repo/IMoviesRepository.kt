@@ -21,4 +21,6 @@ interface IMoviesRepository {
     fun loadMovieImages(movieId: Int): Single<MovieImagesResponse>
 
     fun loadCastAndCrew(movieId: Int): Single<CastAndCrewResponse>
+
+    fun getTopRatedMovies(): Single<BaseResponse<MovieItemResponse>>
 }

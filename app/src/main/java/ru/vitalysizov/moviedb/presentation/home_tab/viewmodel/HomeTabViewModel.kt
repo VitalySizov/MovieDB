@@ -3,17 +3,17 @@ package ru.vitalysizov.moviedb.presentation.home_tab.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.Single
-import io.reactivex.functions.Function5
-import ru.vitalysizov.moviedb.R
-import ru.vitalysizov.moviedb.domain.useCase.genres.LoadMoviesGenresUseCase
+import io.reactivex.functions.Function3
 import ru.vitalysizov.moviedb.domain.useCase.movies.LoadNowPlayingMoviesUseCase
 import ru.vitalysizov.moviedb.domain.useCase.movies.LoadPopularMoviesUseCase
-import ru.vitalysizov.moviedb.domain.useCase.movies.LoadTrendingMoviesUseCase
-import ru.vitalysizov.moviedb.model.domain.GenreItem
+import ru.vitalysizov.moviedb.domain.useCase.movies.LoadTopRatedMoviesUseCase
+import ru.vitalysizov.moviedb.domain.useCase.tvShows.LoadPopularTvShowsUseCase
+import ru.vitalysizov.moviedb.domain.useCase.tvShows.LoadTopRatedTvShowsUseCase
 import ru.vitalysizov.moviedb.model.domain.movies.MovieItem
+import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowItem
 import ru.vitalysizov.moviedb.presentation.base.viewmodel.BaseViewModel
-import ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.GenresCategory
-import ru.vitalysizov.moviedb.presentation.home_tab.adapters.models.MoviesCategory
+import ru.vitalysizov.moviedb.presentation.home_tab.MediaTypeCategory
+import ru.vitalysizov.moviedb.presentation.home_tab.MediaTypeCategoryItems
 import ru.vitalysizov.moviedb.utils.Event
 import ru.vitalysizov.moviedb.utils.ioToUi
 import javax.inject.Inject
@@ -21,106 +21,158 @@ import javax.inject.Inject
 class HomeTabViewModel @Inject constructor(
     private val loadNowPlayingMoviesUseCase: LoadNowPlayingMoviesUseCase,
     private val loadPopularMoviesUseCase: LoadPopularMoviesUseCase,
-    private val loadMoviesGenresUseCase: LoadMoviesGenresUseCase,
-    private val loadTrendingMoviesUseCase: LoadTrendingMoviesUseCase
+    private val loadPopularTvShowsUseCase: LoadPopularTvShowsUseCase,
+    private val loadTopRatedMoviesUseCase: LoadTopRatedMoviesUseCase,
+    private val loadTopRatedTvShowsUseCase: LoadTopRatedTvShowsUseCase
 ) : BaseViewModel() {
 
-    private val _inTheatersMoviesCategory = MutableLiveData<List<MoviesCategory>>()
-    val inTheatersMoviesCategory: LiveData<List<MoviesCategory>>
-        get() = _inTheatersMoviesCategory
+    private val nowPlayingMoviesMutable = MutableLiveData<List<MovieItem>>()
+    val nowPlayingMovies: LiveData<List<MovieItem>> get() = nowPlayingMoviesMutable
 
-    private val _popMoviesCategory = MutableLiveData<List<MoviesCategory>>()
-    val popMoviesCategory: LiveData<List<MoviesCategory>>
-        get() = _popMoviesCategory
+    private val currentPopularCategoryMutable = MutableLiveData<MediaTypeCategory>()
+    val currentMediaTypeCategory: LiveData<MediaTypeCategory> get() = currentPopularCategoryMutable
 
-    private val _genresCategory = MutableLiveData<List<GenresCategory>>()
-    val genresCategory: LiveData<List<GenresCategory>>
-        get() = _genresCategory
+    private val popularCategoryItemsMutable = MutableLiveData<MediaTypeCategoryItems>()
+    val mediaTypeCategoryItems: LiveData<MediaTypeCategoryItems> get() = popularCategoryItemsMutable
 
-    private val _moviesTrendingCategory = MutableLiveData<List<MoviesCategory>>()
-    val moviesTrendingCategory: LiveData<List<MoviesCategory>>
-        get() = _moviesTrendingCategory
+    private val currentTopRatedCategoryMutable = MutableLiveData<MediaTypeCategory>()
+    val currentTopRatedCategory: LiveData<MediaTypeCategory> get() = currentTopRatedCategoryMutable
 
-    private val _movieDetailsClick = MutableLiveData<Event<Int>>()
-    val movieDetailsClick: LiveData<Event<Int>>
-        get() = _movieDetailsClick
+    private val topRatedCategoryItemsMutable = MutableLiveData<MediaTypeCategoryItems>()
+    val topRatedCategoryItems: LiveData<MediaTypeCategoryItems> get() = topRatedCategoryItemsMutable
+
+    private val navigateToMovieDetailsMutable = MutableLiveData<Event<MovieItem>>()
+    val navigateToMovieDetails: LiveData<Event<MovieItem>> get() = navigateToMovieDetailsMutable
+
+    private val navigateToTvShowDetailsMutable = MutableLiveData<Event<TvShowItem>>()
+    val navigateToTvShowDetails: LiveData<Event<TvShowItem>> get() = navigateToTvShowDetailsMutable
 
     init {
-        loadHomeTabContent()
+        loadHomeTabInitContent()
+        initPopularCategory()
+        initTopRatedCategory()
     }
 
-    companion object {
-        const val TIME_PARAMS_WEEK = "week"
-        const val TIME_PARAMS_DAY = "day"
+    private fun initPopularCategory() {
+        currentPopularCategoryMutable.value = MediaTypeCategory.MOVIES
     }
 
-    private fun loadHomeTabContent() {
+    private fun initTopRatedCategory() {
+        currentTopRatedCategoryMutable.value = MediaTypeCategory.MOVIES
+    }
+
+    private fun loadHomeTabInitContent() {
         launch {
             Single.zip(
                 loadNowPlayingMoviesUseCase.invoke().ioToUi(),
                 loadPopularMoviesUseCase.invoke().ioToUi(),
-                loadTrendingMoviesUseCase.invoke(TIME_PARAMS_WEEK).ioToUi(),
-                loadTrendingMoviesUseCase.invoke(TIME_PARAMS_DAY).ioToUi(),
-                loadMoviesGenresUseCase.invoke().ioToUi(),
-                Function5() { nowPlayingMovies: List<MovieItem>,
-                              popularMovies: List<MovieItem>,
-                              trendingMoviesByDay: List<MovieItem>,
-                              trendingMoviesByWeek: List<MovieItem>,
-                              genres: List<GenreItem> ->
-                    return@Function5 HomeTabContent(
-                        nowPlayingMovies,
-                        popularMovies,
-                        trendingMoviesByDay,
-                        trendingMoviesByWeek,
-                        genres
+                loadTopRatedMoviesUseCase.invoke().ioToUi(),
+                Function3() { nowPlayingMoviesResponse: List<MovieItem>,
+                              popularMoviesResponse: List<MovieItem>,
+                              topRatedMoviesResponse: List<MovieItem> ->
+                    return@Function3 HomeTabInitContent(
+                        nowPlayingMovies = nowPlayingMoviesResponse,
+                        popularMovies = popularMoviesResponse,
+                        topRatedMovies = topRatedMoviesResponse
                     )
-                })
+                }
+            )
                 .doOnSubscribe { showLoading() }
                 .doAfterTerminate { hideLoading() }
-                .subscribe({
-                handleSuccessLoadHomeTabContent(it)
-            }, {
-                handleError(it)
-            })
+                .subscribe(this::handleSuccessLoadHomeTabInitContent, this::handleError)
         }
     }
 
-    private fun handleSuccessLoadHomeTabContent(homeTabContent: HomeTabContent) {
-        _inTheatersMoviesCategory.value = listOf(
-            MoviesCategory(
-                title = R.string.now_in_theaters_header,
-                movies = homeTabContent.nowPlayingMovies
-            )
-        )
-
-        _popMoviesCategory.value = listOf(
-            MoviesCategory(
-                title = R.string.populars_header,
-                movies = homeTabContent.popularMovies
-            )
-        )
-
-        _genresCategory.value = listOf(
-            GenresCategory(homeTabContent.genres)
-        )
-
-        _moviesTrendingCategory.value = listOf(
-            MoviesCategory(
-                R.string.populars_header,
-                homeTabContent.trendingMoviesByDay
-            )
-        )
+    private fun handleSuccessLoadHomeTabInitContent(homeTabInitContent: HomeTabInitContent) {
+        with(homeTabInitContent) {
+            nowPlayingMoviesMutable.value = nowPlayingMovies
+            popularCategoryItemsMutable.value = MediaTypeCategoryItems.Movies(popularMovies)
+            topRatedCategoryItemsMutable.value = MediaTypeCategoryItems.Movies(topRatedMovies)
+        }
     }
 
-    fun setMovieDetailsClick(movieId: Int) {
-        _movieDetailsClick.value = Event(movieId)
+    fun onChangeCurrentPopularCategory(selectedIndex: Int) {
+        currentPopularCategoryMutable.value = MediaTypeCategory.getCategory(selectedIndex)
+        getItemsByCurrentPopularCategory()
     }
+
+    fun onChangeCurrentTopRatedCategory(selectedIndex: Int) {
+        currentTopRatedCategoryMutable.value = MediaTypeCategory.getCategory(selectedIndex)
+        getItemsByCurrentTopRatedCategory()
+    }
+
+    private fun getItemsByCurrentPopularCategory() {
+        when (currentMediaTypeCategory.value) {
+            MediaTypeCategory.MOVIES -> {
+                getPopularMovies()
+            }
+            MediaTypeCategory.TV -> {
+                getPopularTvShows()
+            }
+        }
+    }
+
+    private fun getItemsByCurrentTopRatedCategory() {
+        when (currentTopRatedCategory.value) {
+            MediaTypeCategory.MOVIES -> {
+                getTopRatedMovies()
+            }
+            MediaTypeCategory.TV -> {
+                getTopRatedTvShows()
+            }
+        }
+    }
+
+    private fun getPopularMovies() {
+        launch {
+            loadPopularMoviesUseCase.invoke().ioToUi()
+                .subscribe({
+                    popularCategoryItemsMutable.value = MediaTypeCategoryItems.Movies(it)
+                }, { error ->
+                    handleError(error)
+                })
+        }
+    }
+
+    private fun getPopularTvShows() {
+        launch {
+            loadPopularTvShowsUseCase.invoke().ioToUi()
+                .subscribe({
+                    popularCategoryItemsMutable.value = MediaTypeCategoryItems.TvShow(it)
+                }, { error ->
+                    handleError(error)
+                })
+        }
+    }
+
+    private fun getTopRatedMovies() {
+        launch {
+            loadTopRatedMoviesUseCase.invoke().ioToUi()
+                .subscribe({
+                    topRatedCategoryItemsMutable.value = MediaTypeCategoryItems.Movies(it)
+                }, { error ->
+                    handleError(error)
+                })
+        }
+    }
+
+    private fun getTopRatedTvShows() {
+        launch {
+            loadTopRatedTvShowsUseCase.invoke().ioToUi()
+                .subscribe({
+                    topRatedCategoryItemsMutable.value = MediaTypeCategoryItems.TvShow(it)
+                }, { error ->
+                    handleError(error)
+                })
+        }
+    }
+
+    fun onMovieClicked(movie: MovieItem) {
+        navigateToMovieDetailsMutable.value = Event(movie)
+    }
+
+    fun onTvShowClicked(tvShow: TvShowItem) {
+        navigateToTvShowDetailsMutable.value = Event(tvShow)
+    }
+
 }
-
-data class HomeTabContent(
-    val nowPlayingMovies: List<MovieItem>,
-    val popularMovies: List<MovieItem>,
-    val trendingMoviesByDay: List<MovieItem>,
-    val trendingMoviesByWeek: List<MovieItem>,
-    val genres: List<GenreItem>
-)

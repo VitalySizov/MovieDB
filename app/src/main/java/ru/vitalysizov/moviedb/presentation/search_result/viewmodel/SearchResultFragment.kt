@@ -132,10 +132,9 @@ class SearchResultFragment : BaseFragment() {
     private fun initMovieClickObserver() {
         searchResultViewModel.movieDetailsClick.observe(viewLifecycleOwner, Observer { item ->
             item.getContentIfNotHandled()?.let {
-                val args = MovieDetailsFragmentArgs(it)
                 findNavController().navigate(
-                    R.id.action_searchResultFragment_to_movieDetailsFragment2,
-                    args.toBundle()
+                    R.id.action_global_movieDetailsFragment,
+                    MovieDetailsFragmentArgs(it).toBundle()
                 )
             }
         })

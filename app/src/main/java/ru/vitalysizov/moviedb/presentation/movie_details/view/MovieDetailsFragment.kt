@@ -85,7 +85,7 @@ class MovieDetailsFragment : BaseFragment(), ItemClickListener<CastItem> {
             item.getContentIfNotHandled()?.let {
                 val args = PersonDetailsFragmentArgs(it)
                 findNavController().navigate(
-                    R.id.action_to_peopleDetailsFragment,
+                    R.id.action_global_personDetailsFragment,
                     args.toBundle()
                 )
             }

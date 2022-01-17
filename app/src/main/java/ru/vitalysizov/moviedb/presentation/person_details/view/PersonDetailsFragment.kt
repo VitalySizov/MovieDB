@@ -97,23 +97,8 @@ class PersonDetailsFragment : BaseFragment() {
         personDetailsViewModel.setTvShowDetailsClick(item.id)
     }
 
-    //TODO: it's dirty navigation need refactoring
     private fun navigateToMovieDetails(movieId: Int) {
         val args = MovieDetailsFragmentArgs(movieId)
-        try {
-            findNavController().navigate(
-                R.id.homeMovieDetailsFragment,
-                args.toBundle()
-            )
-        } catch (e: IllegalArgumentException) {
-            try {
-                findNavController().navigate(
-                    R.id.searchMovieDetailsFragment,
-                    args.toBundle()
-                )
-            } finally {
-
-            }
-        }
+        //TODO
     }
 }

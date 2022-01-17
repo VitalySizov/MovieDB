@@ -17,8 +17,9 @@ class IncludeImageLanguageInterceptor @Inject constructor() : Interceptor {
 
         val urlBuilder = url.newBuilder()
 
+        // TODO: rework
         if (request.url.encodedPath.contains("/images", true)) {
-                urlBuilder.addQueryParameter(INCLUDE_IMAGE_LANGUAGE, LANGUAGE_PARAMS)
+            urlBuilder.addQueryParameter(INCLUDE_IMAGE_LANGUAGE, LANGUAGE_PARAMS)
         }
 
         val newUrl = urlBuilder.build()

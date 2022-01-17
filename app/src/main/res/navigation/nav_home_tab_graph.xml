@@ -8,30 +8,48 @@
     <fragment
         android:id="@+id/homeTabFragment"
         android:name="ru.vitalysizov.moviedb.presentation.home_tab.view.HomeTabFragment"
-        tools:layout="@layout/fragment_home_tab"
-        android:label="HomeTabFragment" >
-        <action
-            android:id="@+id/action_homeTabFragment_to_movieDetailsFragment"
-            app:destination="@id/homeMovieDetailsFragment" />
+        android:label="HomeTabFragment"
+        tools:layout="@layout/fragment_home_tab">
     </fragment>
+
     <fragment
-        android:id="@+id/homeMovieDetailsFragment"
-        tools:layout="@layout/fragment_movie_details"
+        android:id="@+id/movieDetailsFragment"
         android:name="ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragment"
-        android:label="MovieDetailsFragment" >
+        android:label="MovieDetailsFragment">
         <argument
             android:name="movieId"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_to_peopleDetailsFragment"
-            app:destination="@id/peopleDetailsFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/peopleDetailsFragment"
-        android:name="ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragment"
-        android:label="PeopleDetailsFragment" >
+        android:id="@+id/tvShowDetailsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.tv_show_details.TvShowDetailsFragment"
+        android:label="TvShowDetailsFragment">
+
         <argument
-            android:name="peopleId"
+            android:name="tvShowId"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragment"
+        android:label="PersonDetailsFragment">
+        <argument
+            android:name="personId"
+            app:argType="integer" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_tvShowDetailsFragment"
+        app:destination="@id/tvShowDetailsFragment" />
+
+    <action
+        android:id="@+id/action_global_movieDetailsFragment"
+        app:destination="@id/movieDetailsFragment" />
+
+    <action
+        android:id="@+id/action_global_personDetailsFragment"
+        app:destination="@id/personDetailsFragment" />
+
 </navigation>

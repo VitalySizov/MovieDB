@@ -57,6 +57,9 @@ interface IMovieDbApiService {
         @Path("timeWindow") timeWindow: String
     ): Single<BaseResponse<MovieItemResponse>>
 
+    @GET("movie/top_rated")
+    fun getTopRatedMovies(): Single<BaseResponse<MovieItemResponse>>
+
     /**
      * Movie details
      */
@@ -213,5 +216,10 @@ interface IMovieDbApiService {
         @Path("tv_id") tvId: Int
     ): Single<ContentRatingsResponse>
 
+    @GET("tv/popular")
+    fun getTvShowPopular(): Single<BaseResponse<TvShowItemResponse>>
+
+    @GET("tv/top_rated")
+    fun getTopRatedTvShows(): Single<BaseResponse<TvShowItemResponse>>
 
 }

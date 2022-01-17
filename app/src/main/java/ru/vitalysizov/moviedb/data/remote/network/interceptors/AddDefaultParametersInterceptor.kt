@@ -23,6 +23,11 @@ class AddDefaultParametersInterceptor @Inject constructor() : Interceptor {
             .addQueryParameter(DEFAULT_API_KEY, API_KEY)
             .addQueryParameter(DEFAULT_LANGUAGE, LANGUAGE)
 
+        // TODO: rework
+        if (request.url.encodedPath.contains("now_playing", true)) {
+            urlBuilder.addQueryParameter("region", "RU")
+        }
+
         val newUrl = urlBuilder.build()
         return chain.proceed(
             request.newBuilder()

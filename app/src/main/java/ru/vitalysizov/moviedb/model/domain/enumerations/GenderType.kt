@@ -3,7 +3,8 @@ package ru.vitalysizov.moviedb.model.domain.enumerations
 enum class GenderType(val identifier: Int) {
     NOT_SPECIFIED(0),
     FEMALE(1),
-    MALE(2);
+    MALE(2),
+    NOT_BINARY(3);
 
     companion object {
         fun fromIdentifier(id: Int): GenderType {

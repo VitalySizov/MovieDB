@@ -13,6 +13,10 @@
 
     <!-- Home screen -->
     <string name="now_in_theaters_header">В кинотеатрах</string>
+    <string name="title_category_popular">Что популярно</string>
+    <string name="title_category_top_rated">Высокие оценки</string>
+    <string name="title_category_movies">Фильмы</string>
+    <string name="title_category_tv">Сериалы</string>
     <string name="genres_title">Жанры</string>
     <string name="populars_header">Популярное</string>
     <string name="genres_header">Жанры</string>
@@ -91,5 +95,7 @@
     <string name="button_estimate">Оценить</string>
     <string name="title_rating_the_movie_db">Рейтинг TheMovieDb</string>
     <string name="button_add_to_favorite">Добавить в избранное</string>
+    
+    
 
 </resources>

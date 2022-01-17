@@ -16,6 +16,6 @@ class PersonDetailsModule {
     @Provides
     @Named(Params.PERSON_ID)
     fun providePersonId(fragment: PersonDetailsFragment): Int {
-        return PersonDetailsFragmentArgs.fromBundle(fragment.requireArguments()).peopleId
+        return PersonDetailsFragmentArgs.fromBundle(fragment.requireArguments()).personId
     }
 }

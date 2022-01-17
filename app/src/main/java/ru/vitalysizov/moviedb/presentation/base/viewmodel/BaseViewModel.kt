@@ -1,5 +1,6 @@
 package ru.vitalysizov.moviedb.presentation.base.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -8,7 +9,8 @@ import ru.vitalysizov.moviedb.BuildConfig
 
 abstract class BaseViewModel : ViewModel() {
 
-    val loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = loadingMutable
+    private val loadingMutable = MutableLiveData<Boolean>()
 
     private val isShowBottomNavigation = MutableLiveData<Boolean>(true)
 
@@ -26,11 +28,11 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     fun showLoading() {
-        loading.value = true
+        loadingMutable.value = true
     }
 
     fun hideLoading() {
-        loading.value = false
+        loadingMutable.value = false
     }
 
     fun showBottomNavigation() {

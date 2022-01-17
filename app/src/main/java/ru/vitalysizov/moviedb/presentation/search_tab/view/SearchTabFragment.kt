@@ -16,7 +16,7 @@ import ru.vitalysizov.moviedb.model.domain.persons.PersonItem
 import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowItem
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragmentArgs
-import ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragmentArgs
+//import ru.vitalysizov.moviedb.presentation.person_details.view.PersonDetailsFragmentArgs
 import ru.vitalysizov.moviedb.presentation.search_result.viewmodel.SearchResultFragmentArgs
 import ru.vitalysizov.moviedb.presentation.search_tab.adapters.SearchTabAdapter
 import ru.vitalysizov.moviedb.presentation.search_tab.viewmodel.SearchTabViewModel
@@ -101,7 +101,7 @@ class SearchTabFragment : BaseFragment() {
                 dismissKeyboard(binding.root)
                 val args = MovieDetailsFragmentArgs(it)
                 findNavController().navigate(
-                    R.id.action_searchTabFragment_to_movieDetailsFragment2,
+                    R.id.action_global_movieDetailsFragment,
                     args.toBundle()
                 )
             }
@@ -110,10 +110,7 @@ class SearchTabFragment : BaseFragment() {
         searchTabViewModel.tvShowDetailsClicked.observe(viewLifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let {
                 val args = TvShowDetailsFragmentArgs(it)
-                findNavController().navigate(
-                    R.id.action_searchTabFragment_to_tvShowDetailsFragment,
-                    args.toBundle()
-                )
+                //TODO
             }
         })
 
@@ -133,11 +130,7 @@ class SearchTabFragment : BaseFragment() {
 
         searchTabViewModel.personDetailsClick.observe(viewLifecycleOwner) { item ->
             item.getContentIfNotHandled()?.let {
-                val args = PersonDetailsFragmentArgs(it)
-                findNavController().navigate(
-                    R.id.action_to_peopleDetailsFragment,
-                    args.toBundle()
-                )
+                //TODO
             }
         }
 
