@@ -3,7 +3,6 @@
     package="ru.vitalysizov.moviedb">
 
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,11 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="android.webkit.WebView.EnableSafeBrowsing"
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
             android:value="true" />
 
         <activity
             android:name=".presentation.activity.AppActivity"
+            android:exported="true"
             android:launchMode="singleTop">
 
             <intent-filter>

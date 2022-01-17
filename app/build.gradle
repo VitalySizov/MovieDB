@@ -4,13 +4,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "ru.vitalysizov.moviedb"
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -112,7 +112,7 @@ dependencies {
     implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${versions.keyboardVisibilityEvent}"
 
     // ViewPager2
-    implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
+    implementation "androidx.viewpager2:viewpager2:1.1.0-beta01"
 
     implementation "com.google.accompanist:accompanist-pager:0.16.1"
 
