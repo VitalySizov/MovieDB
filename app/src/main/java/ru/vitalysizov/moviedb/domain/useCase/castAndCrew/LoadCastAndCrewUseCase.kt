@@ -12,16 +12,23 @@ class LoadCastAndCrewUseCase @Inject constructor(
     private val moviesRepository: IMoviesRepository,
     private val castMapper: CastMapper,
     private val crewMapper: CrewMapper
-) : SingleWithParamsUseCase<Int, CastAndCrewItem>() {
+) : SingleWithParamsUseCase<LoadCastAndCrewParams, CastAndCrewItem>() {
 
-    override fun invoke(params: Int): Single<CastAndCrewItem> {
-        return moviesRepository.loadCastAndCrew(params)
+    override fun invoke(params: LoadCastAndCrewParams): Single<CastAndCrewItem> {
+        val maxCountCastItems = params.maxCountCastItems
+        return moviesRepository.loadCastAndCrew(params.movieId)
             .map {
+                val cast = castMapper.map(it.cast)
                 CastAndCrewItem(
                     id = it.id ?: 0,
-                    cast = castMapper.map(it.cast),
+                    cast = if (maxCountCastItems == null) cast else cast.take(maxCountCastItems),
                     crew = crewMapper.map(it.crew)
                 )
             }
     }
 }
+
+data class LoadCastAndCrewParams(
+    val movieId: Int,
+    val maxCountCastItems: Int? = 10
+)

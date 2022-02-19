@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 import ru.vitalysizov.moviedb.di.modules.ViewModelKey
 import ru.vitalysizov.moviedb.presentation.account_tab.view.AccountTabFragment
 import ru.vitalysizov.moviedb.presentation.account_tab.viewmodel.AccountTabViewModel
-import ru.vitalysizov.moviedb.presentation.home_tab.view.HomeTabFragment
+import ru.vitalysizov.moviedb.presentation.home_tab.HomeTabFragment
 import ru.vitalysizov.moviedb.presentation.home_tab.viewmodel.HomeTabViewModel
 import ru.vitalysizov.moviedb.presentation.search_tab.view.SearchTabFragment
 import ru.vitalysizov.moviedb.presentation.search_tab.viewmodel.SearchTabViewModel

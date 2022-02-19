@@ -1,7 +1,6 @@
 package ru.vitalysizov.moviedb.domain.mapper.movies
 
 import org.threeten.bp.Duration
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import ru.vitalysizov.moviedb.domain.mapper.Mapper
 import ru.vitalysizov.moviedb.domain.mapper.genres.GenresMapper
@@ -27,7 +26,7 @@ class MovieDetailsMapper @Inject constructor(
 ) : Mapper<MovieDetailsItemResponse, MovieDetailsItem> {
 
     override fun map(from: MovieDetailsItemResponse): MovieDetailsItem {
-        return@map MovieDetailsItem(
+        return MovieDetailsItem(
             popularity = from.popularity ?: 0.0,
             voteCount = from.voteCount ?: 0,
             video = from.video ?: false,

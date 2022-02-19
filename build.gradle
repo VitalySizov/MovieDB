@@ -23,7 +23,7 @@ buildscript {
             keyboardVisibilityEvent: '2.3.0',
             jsoup                  : '1.13.1',
             compose                : '1.0.5',
-            composeCompiler        : '1.2.0-alpha01',
+            composeCompiler        : '1.2.0-alpha02',
             composeActivity        : '1.4.0',
             composeViewModel       : '2.4.0',
             composeConstraintLayout: '1.0.0'
@@ -35,7 +35,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:7.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation}"
 

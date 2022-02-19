@@ -1,4 +1,4 @@
-package ru.vitalysizov.moviedb.presentation.home_tab.view
+package ru.vitalysizov.moviedb.presentation.home_tab
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
-import ru.vitalysizov.moviedb.presentation.home_tab.HomeTabContent
 import ru.vitalysizov.moviedb.presentation.home_tab.viewmodel.HomeTabViewModel
 import ru.vitalysizov.moviedb.presentation.movie_details.view.MovieDetailsFragmentArgs
 import ru.vitalysizov.moviedb.presentation.tv_show_details.TvShowDetailsFragmentArgs

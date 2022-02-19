@@ -114,7 +114,8 @@ dependencies {
     // ViewPager2
     implementation "androidx.viewpager2:viewpager2:1.1.0-beta01"
 
-    implementation "com.google.accompanist:accompanist-pager:0.16.1"
+    implementation "com.google.accompanist:accompanist-pager:0.24.2-alpha"
+    implementation "com.google.accompanist:accompanist-insets:0.24.2-alpha"
 
     // Compose
     implementation "androidx.compose.ui:ui:${versions.compose}"

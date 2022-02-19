@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import ru.vitalysizov.moviedb.presentation.base.view.BaseFragment
@@ -17,6 +18,7 @@ class TvShowDetailsFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: TvShowDetailsViewModel by viewModels { viewModelFactory }
 
+    @ExperimentalUnitApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

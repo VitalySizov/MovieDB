@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -20,18 +19,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.rememberImagePainter
 import ru.vitalysizov.moviedb.R
 import ru.vitalysizov.moviedb.model.domain.GenreItem
-import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastAndCrewItem
-import ru.vitalysizov.moviedb.model.domain.castAndCrew.CastItem
 import ru.vitalysizov.moviedb.model.domain.tvShows.TvShowDetailsItem
+import ru.vitalysizov.moviedb.presentation.common.CastHorizontalList
 
+@ExperimentalUnitApi
 @Composable
 fun TvShowContent(
     viewModel: TvShowDetailsViewModel,
@@ -76,10 +75,9 @@ fun TvShowContent(
                 TvShowRating(content.tvShowDetailsItem)
             }
             item {
-                TvShowCastHeader()
-            }
-            item {
-                TvShowCastList(content.castAndCrewItem)
+                CastHorizontalList(content.castAndCrewItem.cast, onAllCastClicked = {
+                    //TODO navigate to all cast
+                })
             }
         }
     }
@@ -104,7 +102,7 @@ fun TvShowDetailsShortInfo(details: TvShowDetailsItem) {
 @Composable
 fun TvShowDetailsPosterAndDescription(details: TvShowDetailsItem) {
     ConstraintLayout(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-        val (imagePoster, genresList, textOverview, buttonAddToFavorite) = createRefs()
+        val (imagePoster, textOverview, buttonAddToFavorite) = createRefs()
         Image(
             painter = rememberImagePainter(details.posterPath),
             contentDescription = null,
@@ -116,19 +114,11 @@ fun TvShowDetailsPosterAndDescription(details: TvShowDetailsItem) {
                 },
             contentScale = ContentScale.Crop
         )
-        TvShowGenresList(
-            genres = details.genres,
-            modifier = Modifier.constrainAs(genresList) {
-                start.linkTo(imagePoster.end, margin = 8.dp)
-                end.linkTo(parent.end)
-                width = Dimension.fillToConstraints
-            }
-        )
         Text(
             text = details.overview,
             modifier = Modifier
                 .constrainAs(textOverview) {
-                    top.linkTo(genresList.bottom)
+                    top.linkTo(imagePoster.top)
                     start.linkTo(imagePoster.end, margin = 8.dp)
                     end.linkTo(parent.end, margin = 8.dp)
                     bottom.linkTo(imagePoster.bottom)
@@ -215,51 +205,6 @@ fun TvShowRating(details: TvShowDetailsItem) {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun TvShowCastHeader() {
-    Row(Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp, top = 8.dp)) {
-        Text(
-            text = stringResource(id = R.string.cast_header),
-            modifier = Modifier.weight(2f, true)
-        )
-        ClickableText(
-            modifier = Modifier
-                .align(Alignment.Bottom)
-                .weight(1f)
-                .wrapContentWidth(align = Alignment.End),
-            text = AnnotatedString(stringResource(id = R.string.cast_all)),
-            onClick = {
-                //TODO: navigate to all cast
-            }
-        )
-    }
-}
-
-@Composable
-fun TvShowCastList(castAndCrewItem: CastAndCrewItem) {
-    LazyRow(contentPadding = PaddingValues(start = 8.dp)) {
-        castAndCrewItem.cast.forEach { castItem ->
-            item {
-                Spacer(modifier = Modifier.padding(start = 8.dp))
-                TvShowCastItem(castItem = castItem)
-            }
-        }
-    }
-}
-
-@Composable
-fun TvShowCastItem(castItem: CastItem) {
-    Column(modifier = Modifier.width(100.dp)) {
-        Image(
-            painter = rememberImagePainter(castItem.profilePath),
-            contentDescription = null,
-            modifier = Modifier
-                .size(width = 100.dp, height = 150.dp)
-        )
-        Text(text = castItem.name)
     }
 }
 

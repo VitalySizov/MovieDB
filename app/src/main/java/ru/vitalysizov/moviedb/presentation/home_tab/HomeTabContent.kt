@@ -94,7 +94,8 @@ fun HomeTabContent(viewModel: HomeTabViewModel = androidx.lifecycle.viewmodel.co
 @Composable
 fun MoviesInTheatersList(movies: List<MovieItem>, onItemClickListener: (MovieItem) -> Unit) {
     HorizontalPager(
-        state = rememberPagerState(pageCount = movies.size),
+        state = rememberPagerState(),
+        count = movies.size,
         modifier = Modifier.fillMaxWidth()
     ) { page ->
         MovieInTheaterItem(movies[page], onItemClickListener)
